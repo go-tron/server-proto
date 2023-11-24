@@ -1,0 +1,252 @@
+syntax = "proto3";
+import "base.proto";
+
+option go_package = "../pb";
+
+enum ServerCmd {
+  //通用
+  ServerCmdUnspecified = 0;
+  ServerCmdLogin = 1; //登录 消息体 ServerLogin
+
+  ServerCmdItemUpdate = 101; //资产变更 消息体 ServerItemUpdate
+  ServerCmdMarquee = 102; //跑马灯 消息体 ServerMarquee
+  ServerCmdSignupRefresh = 103; //报名人数刷新 消息体 ServerSignupRefresh
+
+  //牌桌
+  ServerCmdGoToJoin = 1000; //服务端通知加入 消息体 ServerGoToJoin
+  ServerCmdSelfJoin = 1001; //自己加入 消息体 ServerSelfJoin
+  ServerCmdUserJoin = 1002; //其他用户加入 消息体 ServerUserJoin
+  ServerCmdUserJoining = 1003; //其他用户加载中进度 消息体 ServerUserJoining
+  ServerCmdSelfEnter = 1004; //自己加载完成 消息体 ServerSelfEnter
+  ServerCmdUserEnter = 1005; //其他用户加载完成 消息体 ServerUserEnter
+  ServerCmdUserState = 1006; //其他用户状态变更 消息体 ServerUserState
+  ServerCmdSelfLeave = 1007; //用户离开 消息体 无
+  ServerCmdTableStart = 1008; //牌桌开始 消息体 ServerTableStart
+  ServerCmdTableEnd = 1009; //牌桌结束 消息体 ServerTableEnd
+  ServerCmdTableRestart = 1010; //没人叫分，重新开始 消息体 ServerTableRestart
+  ServerCmdCheckInGame = 1011; //查询是否在游戏中 消息体 ServerCheckInGame
+  ServerCmdRateChange = 1012; //倍率改变 消息体 ServerRateChange
+  ServerCmdDeckEnd = 1013; //单副牌结算 消息体 ServerDeckEnd
+  ServerCmdChat = 1014; //牌桌聊天 消息体 ServerChat
+  ServerCmdVote = 1015; //解散房间投票 消息体 ServerVote |解散后返回ServerCmdTableEnd
+  ServerCmdPrepare = 1016; //准备 消息体 ServerPrepare
+  ServerCmdUserExit = 1017; //退出牌桌 消息体 ServerUserExit
+
+  //玩法
+  ServerCmdDeal = 3001; //发牌 消息体 ServerDeal
+  ServerCmdTakeLandlord = 3002; //取得坑主并挖底牌 消息体 ServerTakeLandlord
+  ServerCmdToCallRate = 3003; //到谁叫分 ServerToCallRate
+  ServerCmdToCallDouble = 3004; //到谁加倍  消息体 ServerToCallDouble
+  ServerCmdToPlay = 3005; //到谁出牌  消息体 ServerToPlay
+  ServerCmdToFollow = 3006; //到谁跟牌  消息体 ServerToFollow
+  ServerCmdToCantFollow = 3007; //到谁要不起 消息体 ServerToCantFollow
+  ServerCmdCallRate = 3008; //用户叫分 消息体 ServerCallRate
+  ServerCmdCallDouble = 3009; //用户加倍 消息体 ServerCallDouble
+  ServerCmdPlay = 3010; //用户出牌 消息体 ServerPlay
+  ServerCmdPass = 3011; //用户过牌 消息体 ServerPass
+  ServerCmdFollow = 3012; //用户跟牌 消息体 ServerFollow
+
+  //竞技场
+  ServerCmdStartSoon = 5000; //赛事即将开始 消息体 ServerStartSoon
+  ServerCmdMatching = 5001; //匹配中 消息体 ServerMatching
+  ServerCmdPromote = 5002; //晋级 消息体 ServerPromote
+  ServerCmdRanking = 5003; //排名 消息体 ServerRanking
+}
+
+message InGame {
+  string GameId = 1;
+  GameType GameType = 2; //游戏类型
+  GameCategory GameCategory = 3; //游戏类别
+  string TableId = 4;
+}
+
+message ServerLogin {
+  optional InGame InGame = 1;
+}
+
+message ServerItemUpdate {
+  repeated Item Item = 1;
+}
+
+message ServerMarquee {
+  string Text = 1;
+}
+
+message ServerGoToJoin {
+  InGame InGame = 1;
+}
+
+message ServerSelfJoin {
+  Table Table = 1; //牌桌数据
+}
+
+message ServerUserJoin {
+  User User = 1; //用户数据
+}
+
+message ServerUserJoining {
+  uint32 Seat = 1;
+  uint32 Percent = 2; //加载进度
+}
+
+message ServerSelfEnter {
+  Table Table = 1; //牌桌数据
+}
+
+message ServerUserEnter {
+  User User = 1;  //用户数据
+}
+
+message ServerUserState {
+  uint32 Seat = 1;
+  bool Online = 2; // 是否在线
+  bool Leaved = 3; // 是否离开
+  bool Hosted = 4; // 是否托管
+}
+
+message ServerUserExit {
+  uint32 Seat = 1;
+}
+
+message ServerTableStart {
+  uint32 CurrentDeck = 1; //当前第几副牌
+}
+
+message ServerDeckEnd {
+  uint32 CurrentDeck = 1; //当前第几副牌
+  uint32 Spring = 2; //春天 0:无 1:春天 2:反春天
+  uint32 Rate = 3; //倍率
+  repeated UserDeckEnd Users = 4; //所有用户结算数据
+}
+
+message ServerTableEnd {
+  uint32 CurrentDeck = 1; //当前第几副牌
+  repeated UserTableEnd Users = 2; //所有用户结算数据
+  repeated Deck Decks = 3; //每副牌结算数据列表
+}
+
+message ServerTableRestart {
+  uint32 CurrentDeck = 1; //当前第几副牌
+}
+
+message ServerCheckInGame {
+  optional InGame InGame = 1;
+}
+
+message ServerDeal {
+  repeated UserCards Cards = 1; //所有用户手牌 其他用户牌为0x00
+  bytes HoleCards = 2; //4张底牌0x00
+}
+
+message ServerTakeLandlord {
+  uint32 Seat = 1; //地主
+  bytes Cards = 2; //翻开4张底牌
+}
+
+message ServerToCallRate {
+  uint32 Seat = 1;
+  uint32 Timeout = 2; //超时秒数
+  uint32 CurrentRate = 3; //当前叫分数
+}
+
+message ServerToCallDouble {
+  uint32 Seat = 1;
+  uint32 Timeout = 2; //超时秒数
+}
+
+message ServerToPlay {
+  uint32 Seat = 1;
+  uint32 Timeout = 2; //超时秒数
+}
+
+message ServerToFollow {
+  uint32 Seat = 1;
+  uint32 Timeout = 2; //超时秒数
+  bytes Cards = 3; //上手出牌
+}
+
+message ServerToCantFollow {
+  uint32 Seat = 1;
+  uint32 Timeout = 2; //超时秒数
+}
+
+message ServerCallRate {
+  uint32 Seat = 1;
+  uint32 Rate = 2; //叫几分 对应值1、2、3
+}
+
+message ServerCallDouble {
+  uint32 Seat = 1;
+  uint32 Double = 2; //加倍取值1 超级加倍取值2
+}
+
+message ServerPlay {
+  uint32 Seat = 1;
+  bytes Cards = 2;
+}
+
+message ServerPass {
+  uint32 Seat = 1;
+}
+
+message ServerFollow {
+  uint32 Seat = 1;
+  bytes Cards = 2;
+}
+
+message ServerRateChange{
+  uint32 Rate = 1;
+}
+
+message ServerChat {
+  uint32 Seat = 1;
+  ChatType Type = 2;
+  uint32 ID = 3;
+  uint32 ToSeat = 4;
+  uint32 Quantity = 5;
+}
+
+message ServerVote {
+  repeated UserVote UserVote = 1;
+  uint32 Timeout = 2; //超时秒数
+}
+
+message ServerPrepare {
+  uint32 Seat = 1;
+  bool Ready = 2;
+}
+
+message ServerMatching {
+  uint32 GameConfigId = 1; //游戏配置Id
+  uint32 People = 2; //总数
+  uint32 CurrentPeople = 3; //当前人数
+  repeated string Avatar = 4; //头像
+}
+
+message ServerPromote {
+  PromoteType PromoteType = 1; //类别
+  repeated Round Rounds = 2; //轮次列表
+  uint32 CurrentRound = 3; //当前轮次
+  uint32 Ranking = 4; //排名
+  uint32 CurrentPeople = 5; //总人数
+}
+
+message ServerRanking {
+  uint32 GameConfigId = 1; //游戏配置Id
+  string GameTitle = 2; //游戏标题
+  uint32 Ranking = 3; //排名
+  string Nickname = 4; //昵称
+  repeated Item Items = 5; //奖品列表
+}
+
+message ServerStartSoon {
+  uint32 GameConfigId = 1; //游戏配置Id
+  string GameTitle = 2; //游戏标题
+  uint32 Timeout = 3; //开赛剩余时间倒计时
+}
+
+message ServerSignupRefresh {
+  GameCategory GameCategoryId = 1; //游戏类别
+  uint32 GameConfigId = 2; //游戏配置Id
+  uint32 Count = 3; //报名人数
+}

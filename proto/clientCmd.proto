@@ -1,0 +1,103 @@
+syntax = "proto3";
+import "base.proto";
+
+option go_package = "../pb";
+
+enum ClientCmd {
+  //通用
+  ClientCmdUnspecified = 0;
+  ClientCmdLogin = 1; //登录 消息体 ClientLogin
+  ClientCmdTableDestroy = 2; //销毁用户当前牌桌 消息体 无
+
+  ClientCmdCurrentAppPage = 201; //用户当前页面 ClientCurrentAppPage
+  ClientCmdFindMatchingGame = 202; //查询是否有匹配中的人满赛 消息体 无
+
+  //牌桌
+  ClientCmdJoin = 2001; //加入 消息体 ClientJoin
+  ClientCmdJoining = 2002; //加入进度 消息体 ClientJoining
+  ClientCmdEnter = 2003; //牌桌加载完成 消息体 ClientEnter
+  ClientCmdLeave = 2004; //离开 消息体 无
+  ClientCmdCheckInGame = 2005; //查询当前游戏牌桌 消息体 无
+  ClientCmdRejoin = 2006; //重连进牌桌 消息体 ClientRejoin
+  ClientCmdChat = 2007; //聊天 消息体 ClientChat
+  ClientCmdState = 2008; //状态 消息体 ClientState
+  ClientCmdCreateTable = 2009; //创建房间 消息体 ClientCreateTable |返回ServerSelfJoin
+  ClientCmdVote = 2010; //解散房间投票 消息体 ClientVote |返回ServerCmdVote
+  ClientCmdPrepare = 2011; //准备 消息体 ClientPrepare |返回ServerCmdPrepare
+
+  //玩法
+  ClientCmdCallRate = 4008; //叫分 消息体 ClientCallRate
+  ClientCmdCallDouble = 4009; //加倍 消息体 ClientCallDouble
+  ClientCmdPlay = 4010;  //出牌 消息体 ClientPlay
+  ClientCmdPass = 4011; //过牌 消息体 无
+  ClientCmdFollow = 4012; //跟牌 消息体 ClientFollow
+}
+
+message ClientLogin {
+  string Token = 1;
+}
+
+message ClientJoin {
+  string GameId = 1;
+  string TableNo = 2; //私人牌桌桌号
+}
+
+message ClientJoining {
+  string TableId = 1; //ServerCmdSelfJoin返回
+  uint32 Percent = 2; //加载进度
+}
+
+message ClientEnter {
+  string TableId = 1; //ServerCmdSelfJoin返回
+}
+
+message ClientCallRate {
+  uint32 Rate = 1; //叫几分 对应值1、2、3 不叫为0
+}
+
+message ClientCallDouble {
+  uint32 Double = 1; //加倍取值1 超级加倍取值2
+}
+
+message ClientPlay {
+  bytes Cards = 1;
+}
+
+message ClientFollow {
+  bytes Cards = 1;
+}
+
+message ClientRejoin {
+  string GameId = 1;
+  string TableId = 2;
+}
+
+message ClientChat {
+  ChatType Type = 1;
+  uint32 ID = 2;
+  uint32 ToSeat = 3;
+  uint32 Quantity = 4;
+}
+
+message ClientState {
+  bool Hosted = 1; //是否托管
+}
+
+message ClientCreateTable {
+  GameType GameType = 1; //游戏类型
+  bool WithBomb = 2; //是否带炸弹
+  bool WithDouble = 3; //是否带加倍
+  uint32 Decks = 4; //局数
+}
+
+message ClientVote {
+  bool Accept = 1; //是否同意
+}
+
+message ClientPrepare {
+  bool Ready = 1; //是否准备
+}
+
+message ClientCurrentAppPage {
+  AppPage AppPage = 1;
+}

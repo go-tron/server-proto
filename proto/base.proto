@@ -1,0 +1,195 @@
+syntax = "proto3";
+
+option go_package = "../pb";
+
+//游戏类型
+enum GameType {
+  GameTypeUnspecified = 0;
+  GameTypeDigHole = 1; //挖坑
+  GameTypeLandlord = 2; //斗地主
+  GameTypeMahjong = 3; //麻将
+}
+
+//游戏类别
+enum GameCategory {
+  GameCategoryUnspecified = 0;
+  GameCategoryGold = 1; //金币场（自由场）
+  GameCategoryCompetition = 2; //竞技场
+  GameCategoryPrivate = 3; //好友房
+}
+
+//牌桌状态
+enum TableStatus {
+  TableStatusUnspecified = 0;
+  TableStatusMatching = 1; //匹配中
+  TableStatusStarted = 2; //已开局
+  TableStatusCallRate = 3; //叫分中
+  TableStatusCallDouble = 4; //叫加倍中
+  TableStatusPlaying = 5; //出牌中
+  TableStatusDeckEnd = 6; //本副牌结算中
+  TableStatusEnd = 7; //已结束
+}
+
+enum Action {
+  ActionUnspecified = 0;
+  ActionCallRate = 1; //叫分
+  ActionCallDouble = 2; //加倍
+  ActionPlay = 3; //出牌
+  ActionFollow = 4; //跟牌
+  ActionCantFollow = 5; //要不起
+}
+
+enum EndTag {
+  EndTagUnspecified = 0;
+  EndTagReachMax = 1; //封顶
+  EndTagGoBroke = 2; //破产
+}
+
+enum ChatType {
+  ChatTypeUnspecified = 0;
+  ChatTypeText = 1; //文字
+  ChatTypeEmo = 2; //表情
+  ChatTypeProp = 3; //道具
+}
+
+enum VoteState {
+  VoteStateUnspecified = 0;
+  VoteStateAwaiting = 1;
+  VoteStateAccept = 2;
+  VoteStateReject = 3;
+}
+
+//游戏类型
+enum PromoteType {
+  PromoteTypeUnspecified = 0;
+  PromoteTypePending = 1; //排名中
+  PromoteTypeSucceed = 2; //晋级
+  PromoteTypeFailed = 3; //失败
+  PromoteTypeBye = 4; //轮空
+}
+
+//客户端页面
+enum AppPage {
+  AppPageUnspecified = 0;
+  AppPageHome = 1; //大厅
+  AppPageGameGoldList = 2; //金币场列表
+  AppPageGameCompetitionList = 3; //比赛场列表
+}
+
+//竞技场状态
+enum CompetitionStatus {
+  CompetitionStatusUnspecified = 0;
+  CompetitionStatusMatching = 1; //匹配中
+  CompetitionStatusPlaying = 2; //打牌中
+  CompetitionStatusWaitingTables = 3; //等待所有桌
+  CompetitionStatusPromoting = 4; //轮次排名中
+}
+
+message UserCards {
+  uint32 Seat = 1;
+  bytes Cards = 2;
+}
+
+message UserDeckEnd {
+  uint32 Seat = 1;
+  int32 DeckScore = 2; // 本副牌分数
+  int32 Score = 3;  // 当前分数
+  optional bytes Cards = 4; //剩余手牌
+}
+
+message UserVote {//投票
+  uint32 Seat = 1;
+  VoteState VoteState = 2;
+}
+
+message Deck {//单副牌
+  uint32 DeckNo = 1; //序号
+  repeated UserDeckEnd Users = 2; //用户结算数据
+}
+
+message UserTableEnd {
+  uint32 Seat = 1;
+  string UserNo = 2; //用户编号
+  string Nickname = 3; //昵称
+  string Avatar = 4; //头像
+  uint32 Rate = 5; //加倍数
+  uint32 BaseScore = 6; //牌桌底分
+  int32 Score = 7; //当前分数
+  bool Landlord = 8; //坑主
+  bool Winner = 9; //是否获胜
+  bool Owner = 10; //房主
+  EndTag Tag = 11; //封顶
+  bytes Cards = 12; //剩余手牌
+}
+
+message Item {
+  uint32 ItemId = 1;
+  uint32 Quantity = 2;
+}
+
+message User {
+  string UserId = 1;
+  string UserNo = 2;
+  string Nickname = 3; //昵称
+  string Avatar = 4; //头像
+  uint32 Gender = 5; //性别
+  uint32 Seat = 6; //座位号0,1,2 逆时针方向排列
+  bool Landlord = 7; //坑主
+  int32 Score = 8; //分数
+  uint32 Double = 9; //加倍数
+  bool DoubleCalled = 10; //已叫过加倍
+  bytes Cards = 11; //当前手牌
+  bytes LastCards = 12; //上一手牌
+  repeated Item Items = 13; //道具列表
+  bool Online = 14; //是否在线
+  bool Leaved = 15; //是否离开
+  bool Hosted = 16; //是否托管
+  bool Owner = 17; //房主
+  VoteState VoteState = 18; //投票状态
+  bool Ready = 19; //是否准备
+  uint32 Rank = 20; //当前排名
+}
+
+message Game {
+  string GameId = 1; //游戏ID
+  uint32 GameConfigId = 2; //游戏配置Id
+  GameType GameType = 3; //游戏类型
+  GameCategory GameCategory = 4; //游戏类别
+  string Title = 5; //游戏标题
+  string Image = 6; //游戏图标
+  uint32 Rounds = 7; //游戏总轮次
+  uint32 CurrentRound = 8; //游戏当前轮次
+  uint32 People = 9; //参加人数
+  uint32 CurrentPeople = 10; //当前剩余人数
+  string GameConfig = 11; //游戏配置JSON字符串
+  uint32 DefaultVoteTimeout = 12; //默认投票超时秒数
+  bool WithBomb = 13; //是否带炸弹
+  bool WithDouble = 14; //是否带加倍
+  uint32 PromotePeople = 15; //晋级人数
+  uint32 InitialScore = 16; //初始积分
+}
+
+message Table {
+  Game Game = 1; //游戏
+  TableStatus Status = 2; //牌桌状态
+  repeated User Users = 3; //用户列表
+  string TableId = 4; //牌桌唯一ID
+  string TableNo = 5; //私人牌桌桌号
+  uint32 Decks = 6; //共几副牌
+  uint32 CurrentDeck = 7; //当前第几副牌
+  uint32 BaseScore = 8; //牌桌底分
+  uint32 Rate = 9; //当前倍率
+  bytes HoleCards = 10; //底牌
+  bytes PlayedCards = 11; //已出牌
+  uint32 CurrentSeat = 12; //当前到谁 座位号
+  Action CurrentAction = 13; //当前到谁 动作
+  uint32 CurrentTimeout = 14; //当前到谁 超时秒数
+  optional uint32 VoteTimeout = 15; //当前投票超时秒数，存在时表示正在进行解散投票中
+}
+
+message Round {
+  uint32 RoundNo = 1; //轮次
+  string Title = 2; //标题
+  string Subtitle = 3; //副标题
+  repeated Item Items = 4; //奖品列表
+}

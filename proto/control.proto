@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+option go_package = "../pb";
+
+message AssignToTable {
+  repeated int64 Users = 1;
+  int32 GameConfigId = 2;
+  int32 GameRuleId = 3;
+  int64 GameId = 4;
+  int64 TableId = 5;
+  int32 JoinTimeout = 6;
+}
+
+message AssignToTableResult {
+  int64 GameId = 1;
+  int64 TableId = 2;
+  bool Succeed = 3;
+}
+
+message ForceStartTable {
+  int64 GameId = 1;
+  int64 TableId = 2;
+}
+
+message TableEnd {
+  int64 GameId = 1;
+  int64 TableId = 2;
+}
