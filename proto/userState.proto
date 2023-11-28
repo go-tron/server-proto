@@ -19,5 +19,7 @@ message UserState {
   GameType GameType = 4; //游戏类型
   GameCategory GameCategory = 5; //游戏类别
   uint32 GameConfigId = 6;
-  string TableId = 7;
+  uint32 RoundNo = 7;
+  uint32 RoundId = 8;
+  string TableId = 9;
 }
