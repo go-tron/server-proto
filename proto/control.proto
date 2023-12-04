@@ -1,17 +1,50 @@
 syntax = "proto3";
 
+import "base.proto";
+
 option go_package = "../pb";
 
-message AssignToTable {
+message AssignTable {
   repeated int64 Users = 1;
-  int32 GameConfigId = 2;
-  int32 GameRuleId = 3;
-  int64 GameId = 4;
-  int64 TableId = 5;
-  int32 JoinTimeout = 6;
+  int64 GameId = 2; //游戏ID
+  int64 TableId = 3; //牌桌ID
+  uint32 ForceJoinTimeout = 4; //强制加入时间
+  int64 RoundId = 5; //轮次ID
+  string TableNo = 6; //牌桌编号
+  GameType GameType = 7; //游戏类型
+  GameCategory GameCategory = 8; //游戏类别
+  uint32 GameRuleId = 9; //游戏规则ID
+  uint32 GameConfigId = 10; //游戏配置ID
+  string Title = 11; //游戏标题
+  string Image = 12; //游戏图标
+  uint32 BaseScore = 13; //底分
+  uint32 InitialScore = 14; //初始积分
+  uint32 CallRateTimeout = 15; //叫分超时时间
+  uint32 CallDoubleTimeout = 16; //叫双倍超时时间
+  uint32 PlayTimeout = 17; //打牌超时时间
+  uint32 FollowTimeout = 18; //跟牌超时时间
+  uint32 CantFollowTimeout = 19; //要不起超时时间
+  uint32 People = 20; //参加总人数
+  uint32 CurrentPeople = 21; //当前剩余人数
+  uint32 Rounds = 22; //游戏总轮次
+  uint32 CurrentRound = 23; //游戏当前轮次
+  uint32 PromotePeople = 24; //当前轮次晋级人数
+  uint32 Decks = 25; //打几副牌
+  uint32 CurrentDeck = 26; //当前第几副牌
+  bool WithBomb = 27; //是否带炸弹
+  bool WithDouble = 28; //是否带加倍
+  uint32 MaxRate = 29; //最大倍率
+  uint32 MinEntryGold = 30; //最少携带金币
+  uint32 MaxEntryGold = 31; //最多携带金币
 }
 
-message AssignToTableResult {
+message AssignExistTable {
+  repeated int64 Users = 1;
+  int64 GameId = 2; //游戏ID
+  int64 TableId = 3; //牌桌ID
+}
+
+message AssignTableResult {
   int64 GameId = 1;
   int64 TableId = 2;
   bool Succeed = 3;
