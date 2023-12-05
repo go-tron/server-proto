@@ -4,7 +4,7 @@ import "base.proto";
 
 option go_package = "../pb";
 
-message AssignTable {
+message CreateTable {
   repeated int64 Users = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
@@ -30,24 +30,29 @@ message AssignTable {
   uint32 CurrentRound = 23; //游戏当前轮次
   uint32 PromotePeople = 24; //当前轮次晋级人数
   uint32 Decks = 25; //打几副牌
-  uint32 CurrentDeck = 26; //当前第几副牌
-  bool WithBomb = 27; //是否带炸弹
-  bool WithDouble = 28; //是否带加倍
-  uint32 MaxRate = 29; //最大倍率
-  uint32 MinEntryGold = 30; //最少携带金币
-  uint32 MaxEntryGold = 31; //最多携带金币
+  bool WithBomb = 26; //是否带炸弹
+  bool WithDouble = 27; //是否带加倍
+  uint32 MaxRate = 28; //最大倍率
+  uint32 MinEntryGold = 29; //最少携带金币
+  uint32 MaxEntryGold = 30; //最多携带金币
 }
 
-message AssignExistTable {
-  repeated int64 Users = 1;
-  int64 GameId = 2; //游戏ID
-  int64 TableId = 3; //牌桌ID
-}
-
-message AssignTableResult {
+message CreateTableResult {
   int64 GameId = 1;
   int64 TableId = 2;
   bool Succeed = 3;
+}
+
+message CoverRobot {
+  uint32 GameConfigId = 1;
+  int64 TableId = 2;
+}
+
+message AssignTable {
+  repeated int64 Users = 1;
+  int64 GameId = 2; //游戏ID
+  int64 TableId = 3; //牌桌ID
+  uint32 ForceJoinTimeout = 4; //强制加入时间
 }
 
 message ForceStartTable {
