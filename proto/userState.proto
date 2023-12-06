@@ -20,4 +20,5 @@ message UserState {
   GameCategory GameCategory = 5; //游戏类别
   uint32 GameConfigId = 6;
   string TableId = 7;
+  string ServerId = 8;
 }
