@@ -84,3 +84,9 @@ message TableEnd {
   int64 GameId = 1;
   int64 TableId = 2;
 }
+
+message LeaveTable {
+  repeated int64 Users = 1;
+  int64 GameId = 2; //游戏ID
+  int64 TableId = 3; //牌桌ID
+}

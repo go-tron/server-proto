@@ -781,6 +781,69 @@ func (x *TableEnd) GetTableId() int64 {
 	return 0
 }
 
+type LeaveTable struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Users   []int64 `protobuf:"varint,1,rep,packed,name=Users,proto3" json:"Users,omitempty"`
+	GameId  int64   `protobuf:"varint,2,opt,name=GameId,proto3" json:"GameId,omitempty"`   //游戏ID
+	TableId int64   `protobuf:"varint,3,opt,name=TableId,proto3" json:"TableId,omitempty"` //牌桌ID
+}
+
+func (x *LeaveTable) Reset() {
+	*x = LeaveTable{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_control_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LeaveTable) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeaveTable) ProtoMessage() {}
+
+func (x *LeaveTable) ProtoReflect() protoreflect.Message {
+	mi := &file_control_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeaveTable.ProtoReflect.Descriptor instead.
+func (*LeaveTable) Descriptor() ([]byte, []int) {
+	return file_control_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *LeaveTable) GetUsers() []int64 {
+	if x != nil {
+		return x.Users
+	}
+	return nil
+}
+
+func (x *LeaveTable) GetGameId() int64 {
+	if x != nil {
+		return x.GameId
+	}
+	return 0
+}
+
+func (x *LeaveTable) GetTableId() int64 {
+	if x != nil {
+		return x.TableId
+	}
+	return 0
+}
+
 var File_control_proto protoreflect.FileDescriptor
 
 var file_control_proto_rawDesc = []byte{
@@ -900,8 +963,14 @@ var file_control_proto_rawDesc = []byte{
 	0x22, 0x3c, 0x0a, 0x08, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x45, 0x6e, 0x64, 0x12, 0x16, 0x0a, 0x06,
 	0x47, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x47, 0x61,
 	0x6d, 0x65, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x49, 0x64, 0x18,
-	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x49, 0x64, 0x42, 0x07,
-	0x5a, 0x05, 0x2e, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x49, 0x64, 0x22, 0x54,
+	0x0a, 0x0a, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x54, 0x61, 0x62, 0x6c, 0x65, 0x12, 0x14, 0x0a, 0x05,
+	0x55, 0x73, 0x65, 0x72, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x03, 0x52, 0x05, 0x55, 0x73, 0x65,
+	0x72, 0x73, 0x12, 0x16, 0x0a, 0x06, 0x47, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x06, 0x47, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x12, 0x18, 0x0a, 0x07, 0x54, 0x61,
+	0x62, 0x6c, 0x65, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x54, 0x61, 0x62,
+	0x6c, 0x65, 0x49, 0x64, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -916,7 +985,7 @@ func file_control_proto_rawDescGZIP() []byte {
 	return file_control_proto_rawDescData
 }
 
-var file_control_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_control_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
 var file_control_proto_goTypes = []interface{}{
 	(*TableMessage)(nil),      // 0: TableMessage
 	(*AssignUser)(nil),        // 1: AssignUser
@@ -926,15 +995,16 @@ var file_control_proto_goTypes = []interface{}{
 	(*AssignTable)(nil),       // 5: AssignTable
 	(*ForceStartTable)(nil),   // 6: ForceStartTable
 	(*TableEnd)(nil),          // 7: TableEnd
-	(*anypb.Any)(nil),         // 8: google.protobuf.Any
-	(GameType)(0),             // 9: GameType
-	(GameCategory)(0),         // 10: GameCategory
+	(*LeaveTable)(nil),        // 8: LeaveTable
+	(*anypb.Any)(nil),         // 9: google.protobuf.Any
+	(GameType)(0),             // 10: GameType
+	(GameCategory)(0),         // 11: GameCategory
 }
 var file_control_proto_depIdxs = []int32{
-	8,  // 0: TableMessage.Content:type_name -> google.protobuf.Any
+	9,  // 0: TableMessage.Content:type_name -> google.protobuf.Any
 	1,  // 1: CreateTable.Users:type_name -> AssignUser
-	9,  // 2: CreateTable.GameType:type_name -> GameType
-	10, // 3: CreateTable.GameCategory:type_name -> GameCategory
+	10, // 2: CreateTable.GameType:type_name -> GameType
+	11, // 3: CreateTable.GameCategory:type_name -> GameCategory
 	1,  // 4: AssignTable.Users:type_name -> AssignUser
 	5,  // [5:5] is the sub-list for method output_type
 	5,  // [5:5] is the sub-list for method input_type
@@ -1046,6 +1116,18 @@ func file_control_proto_init() {
 				return nil
 			}
 		}
+		file_control_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LeaveTable); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1053,7 +1135,7 @@ func file_control_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_control_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   8,
+			NumMessages:   9,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
