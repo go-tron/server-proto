@@ -13,14 +13,14 @@ message TableMessage {
 }
 
 message AssignUser {
-  int64 UserId = 1;
-  string UserNo = 2;
-  string Nickname = 3; //昵称
-  string Avatar = 4; //头像
-  uint32 Gender = 5; //性别
-  uint32 Seat = 6; //座位号0,1,2 逆时针方向排列
-  int32 Score = 7; //分数
-  bool Owner = 8; //房主
+  bool Robot = 1;
+  int64 UserId = 2;
+  string UserNo = 3;
+  string Nickname = 4; //昵称
+  string Avatar = 5; //头像
+  uint32 Gender = 6; //性别
+  uint32 Seat = 7; //座位号0,1,2 逆时针方向排列
+  int32 Score = 8; //分数
   uint32 Rank = 9; //当前排名
 }
 
@@ -75,7 +75,7 @@ message AssignTable {
   uint32 ForceJoinTimeout = 4; //强制加入时间
 }
 
-message ForceStartTable {
+message ForceJoinTable {
   int64 GameId = 1;
   int64 TableId = 2;
 }
@@ -85,8 +85,10 @@ message TableEnd {
   int64 TableId = 2;
 }
 
-message LeaveTable {
-  repeated int64 Users = 1;
+message QuitTable {
+  int64 UserId = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
+  GameType GameType = 4; //游戏类型
+  GameCategory GameCategory = 5; //游戏类别
 }
