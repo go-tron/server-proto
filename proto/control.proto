@@ -60,7 +60,9 @@ message CreateTable {
 message CreateTableResult {
   int64 GameId = 1;
   int64 TableId = 2;
-  bool Succeed = 3;
+  GameType GameType = 3; //游戏类型
+  GameCategory GameCategory = 4; //游戏类别
+  bool Succeed = 5;
 }
 
 message CoverRobot {
@@ -83,6 +85,8 @@ message ForceJoinTable {
 message TableEnd {
   int64 GameId = 1;
   int64 TableId = 2;
+  GameType GameType = 3; //游戏类型
+  GameCategory GameCategory = 4; //游戏类别
 }
 
 message QuitTable {
