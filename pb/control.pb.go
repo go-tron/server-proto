@@ -892,6 +892,61 @@ func (x *QuitTable) GetGameCategory() GameCategory {
 	return GameCategory_GameCategoryUnspecified
 }
 
+type StartGame struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	GameConfigId uint32 `protobuf:"varint,1,opt,name=GameConfigId,proto3" json:"GameConfigId,omitempty"`
+	GameId       int64  `protobuf:"varint,2,opt,name=GameId,proto3" json:"GameId,omitempty"`
+}
+
+func (x *StartGame) Reset() {
+	*x = StartGame{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_control_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *StartGame) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*StartGame) ProtoMessage() {}
+
+func (x *StartGame) ProtoReflect() protoreflect.Message {
+	mi := &file_control_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use StartGame.ProtoReflect.Descriptor instead.
+func (*StartGame) Descriptor() ([]byte, []int) {
+	return file_control_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *StartGame) GetGameConfigId() uint32 {
+	if x != nil {
+		return x.GameConfigId
+	}
+	return 0
+}
+
+func (x *StartGame) GetGameId() int64 {
+	if x != nil {
+		return x.GameId
+	}
+	return 0
+}
+
 var File_control_proto protoreflect.FileDescriptor
 
 var file_control_proto_rawDesc = []byte{
@@ -1034,8 +1089,12 @@ var file_control_proto_rawDesc = []byte{
 	0x70, 0x65, 0x12, 0x31, 0x0a, 0x0c, 0x47, 0x61, 0x6d, 0x65, 0x43, 0x61, 0x74, 0x65, 0x67, 0x6f,
 	0x72, 0x79, 0x18, 0x05, 0x20, 0x01, 0x28, 0x0e, 0x32, 0x0d, 0x2e, 0x47, 0x61, 0x6d, 0x65, 0x43,
 	0x61, 0x74, 0x65, 0x67, 0x6f, 0x72, 0x79, 0x52, 0x0c, 0x47, 0x61, 0x6d, 0x65, 0x43, 0x61, 0x74,
-	0x65, 0x67, 0x6f, 0x72, 0x79, 0x42, 0x07, 0x5a, 0x05, 0x2e, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x65, 0x67, 0x6f, 0x72, 0x79, 0x22, 0x47, 0x0a, 0x09, 0x53, 0x74, 0x61, 0x72, 0x74, 0x47, 0x61,
+	0x6d, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x47, 0x61, 0x6d, 0x65, 0x43, 0x6f, 0x6e, 0x66, 0x69, 0x67,
+	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0d, 0x52, 0x0c, 0x47, 0x61, 0x6d, 0x65, 0x43, 0x6f,
+	0x6e, 0x66, 0x69, 0x67, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x47, 0x61, 0x6d, 0x65, 0x49, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x47, 0x61, 0x6d, 0x65, 0x49, 0x64, 0x42, 0x07,
+	0x5a, 0x05, 0x2e, 0x2e, 0x2f, 0x70, 0x62, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1050,7 +1109,7 @@ func file_control_proto_rawDescGZIP() []byte {
 	return file_control_proto_rawDescData
 }
 
-var file_control_proto_msgTypes = make([]protoimpl.MessageInfo, 9)
+var file_control_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_control_proto_goTypes = []interface{}{
 	(*TableMessage)(nil),      // 0: TableMessage
 	(*AssignUser)(nil),        // 1: AssignUser
@@ -1061,22 +1120,23 @@ var file_control_proto_goTypes = []interface{}{
 	(*ForceJoinTable)(nil),    // 6: ForceJoinTable
 	(*TableEnd)(nil),          // 7: TableEnd
 	(*QuitTable)(nil),         // 8: QuitTable
-	(*anypb.Any)(nil),         // 9: google.protobuf.Any
-	(GameType)(0),             // 10: GameType
-	(GameCategory)(0),         // 11: GameCategory
+	(*StartGame)(nil),         // 9: StartGame
+	(*anypb.Any)(nil),         // 10: google.protobuf.Any
+	(GameType)(0),             // 11: GameType
+	(GameCategory)(0),         // 12: GameCategory
 }
 var file_control_proto_depIdxs = []int32{
-	9,  // 0: TableMessage.Content:type_name -> google.protobuf.Any
+	10, // 0: TableMessage.Content:type_name -> google.protobuf.Any
 	1,  // 1: CreateTable.Users:type_name -> AssignUser
-	10, // 2: CreateTable.GameType:type_name -> GameType
-	11, // 3: CreateTable.GameCategory:type_name -> GameCategory
-	10, // 4: CreateTableResult.GameType:type_name -> GameType
-	11, // 5: CreateTableResult.GameCategory:type_name -> GameCategory
+	11, // 2: CreateTable.GameType:type_name -> GameType
+	12, // 3: CreateTable.GameCategory:type_name -> GameCategory
+	11, // 4: CreateTableResult.GameType:type_name -> GameType
+	12, // 5: CreateTableResult.GameCategory:type_name -> GameCategory
 	1,  // 6: AssignTable.Users:type_name -> AssignUser
-	10, // 7: TableEnd.GameType:type_name -> GameType
-	11, // 8: TableEnd.GameCategory:type_name -> GameCategory
-	10, // 9: QuitTable.GameType:type_name -> GameType
-	11, // 10: QuitTable.GameCategory:type_name -> GameCategory
+	11, // 7: TableEnd.GameType:type_name -> GameType
+	12, // 8: TableEnd.GameCategory:type_name -> GameCategory
+	11, // 9: QuitTable.GameType:type_name -> GameType
+	12, // 10: QuitTable.GameCategory:type_name -> GameCategory
 	11, // [11:11] is the sub-list for method output_type
 	11, // [11:11] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name
@@ -1199,6 +1259,18 @@ func file_control_proto_init() {
 				return nil
 			}
 		}
+		file_control_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*StartGame); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -1206,7 +1278,7 @@ func file_control_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_control_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   9,
+			NumMessages:   10,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
