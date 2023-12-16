@@ -99,5 +99,5 @@ message QuitTable {
 
 message StartGame {
   uint32 GameConfigId = 1;
-  int64 GameId = 2;
+  int64 StartTime = 2;
 }
