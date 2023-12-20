@@ -25,7 +25,7 @@ message AssignUser {
 }
 
 message CreateTable {
-  repeated AssignUser Users = 1;
+  repeated AssignUser AssignUsers = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
   uint32 ForceJoinTimeout = 4; //强制加入时间
@@ -71,7 +71,7 @@ message CoverRobot {
 }
 
 message AssignTable {
-  repeated AssignUser Users = 1;
+  repeated AssignUser AssignUsers = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
   uint32 ForceJoinTimeout = 4; //强制加入时间
