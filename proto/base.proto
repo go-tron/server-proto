@@ -127,6 +127,18 @@ message Item {
   uint32 Quantity = 2;
 }
 
+message RateDetails {
+  uint32 Max = 1; //封顶倍率
+  uint32 Base = 2; //挖坑倍率
+  uint32 Hole = 3; //底牌倍率
+  uint32 Spring = 4; //春天倍率
+  uint32 Boom = 5; //炸弹倍率
+  uint32 Public = 6; //公共倍率
+  uint32 Landlord = 7; //挖主倍率
+  repeated uint32 Farmers = 8; //农民倍率 自身是农民时数组长度1， 自身是地主时数组长度2
+  uint32 Total = 9; //总倍率
+}
+
 message User {
   string UserId = 1;
   string UserNo = 2;
@@ -185,6 +197,7 @@ message Table {
   Action CurrentAction = 13; //当前到谁 动作
   uint32 CurrentTimeout = 14; //当前到谁 超时秒数
   optional uint32 VoteTimeout = 15; //当前投票超时秒数，存在时表示正在进行解散投票中
+  RateDetails RateDetails = 16; //倍率详情
 }
 
 message Round {

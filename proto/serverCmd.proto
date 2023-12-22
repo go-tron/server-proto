@@ -141,6 +141,7 @@ message ServerDeal {
 message ServerTakeLandlord {
   uint32 Seat = 1; //地主
   bytes Cards = 2; //翻开4张底牌
+  uint32 HoleRate = 3; //底牌倍率
 }
 
 message ServerToCallRate {
@@ -196,6 +197,7 @@ message ServerFollow {
 
 message ServerRateChange{
   uint32 Rate = 1;
+  RateDetails Details = 2;
 }
 
 message ServerChat {
