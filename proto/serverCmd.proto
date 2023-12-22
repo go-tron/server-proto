@@ -11,6 +11,7 @@ enum ServerCmd {
   ServerCmdItemUpdate = 101; //资产变更 消息体 ServerItemUpdate
   ServerCmdMarquee = 102; //跑马灯 消息体 ServerMarquee
   ServerCmdSignupRefresh = 103; //报名人数刷新 消息体 ServerSignupRefresh
+  ServerCmdBagRefresh = 104; //背包刷新 消息体 ServerCmdBagRefresh
 
   //牌桌
   ServerCmdGoToJoin = 1000; //服务端通知加入 消息体 ServerGoToJoin

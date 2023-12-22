@@ -1,0 +1,126 @@
+syntax = "proto3";
+
+package game.data;
+import "base.proto";
+import "control.proto";
+import "google/protobuf/timestamp.proto";
+
+option go_package = "../pb";
+
+//游戏状态
+enum GameStatus {
+  GameStatusUnspecified = 0;
+  GameStatusStarted = 2; //已开局
+  GameStatusCallRate = 3; //叫分中
+  GameStatusCallDouble = 4; //叫加倍中
+  GameStatusPlaying = 5; //出牌中
+  GameStatusDeckEnd = 6; //本副牌结算中
+}
+
+message Rate {
+  uint32 Hole = 1;
+  uint32 Base = 2;
+  uint32 Spring = 3;
+  uint32 Boom = 4;
+  uint32 Public = 5;
+  uint32 Landlord = 6;
+  repeated uint32 Farmers = 7;
+  uint32 FarmersSum = 8;
+}
+
+message GamePlay {
+  int64 User = 1;
+  string Cards = 2;
+}
+
+message Sequence {
+  google.protobuf.Timestamp Time = 1;
+  int64 User = 2;
+  Action Action = 3;
+  int64 Timeout = 4;
+  bool Reacted = 5;
+}
+
+message User {
+  bool Robot = 1;
+  int64 UserId = 2;
+  string UserNo = 3;
+  string Nickname = 4;
+  string Avatar = 5;
+  uint32 Gender = 6;
+  uint32 Seat = 8;
+  bool Joined = 9;
+  bool Ready = 10;
+  bool Online = 11;
+  bool Leaved = 12;
+  bool Hosted = 13;
+  int32 Score = 14;
+  int32 Rank = 15;
+  bool Entered = 16;
+  bool Landlord = 17;
+  int32 DeckScore = 18;
+  int32 AbsDeckScore = 19;
+  int32 TableScore = 20;
+  uint32 BaseRate = 21;
+  bool BaseRateCalled = 22;
+  uint32 Double = 23;
+  uint32 DoubleRate = 24;
+  bool DoubleCalled = 25;
+  uint32 Rate = 26;
+  bool Winner = 27;
+  string Cards = 28;
+  string CardSetList = 29;
+  string HoldingCards = 30;
+  uint32 PlayedHands = 31;
+  string LastCards = 32;
+  uint32 VoteState = 33;
+}
+
+message GameRecord {
+  int64 id = 1;
+  int64 User = 2;
+  string Cards = 3;
+  int32 Landlord = 4;
+  int32 Score = 5;
+  int32 StartScore = 6;
+  int32 EndScore = 7;
+}
+
+message Game {
+  int64 DeckId = 3;
+  uint32 DeckNo = 4;
+  google.protobuf.Timestamp StartAt = 5;
+  google.protobuf.Timestamp EndAt = 6;
+  repeated GameRecord GameRecords = 7;
+  GameStatus GameStatus = 8;
+  uint32 RateCalledTimes = 9;
+  int64 CurrentUser = 10;
+  int64 NextUser = 11;
+  string Cards = 12;
+  string HoldingCards = 13;
+  string PlayedCards = 14;
+  string HoleCards = 15;
+  GamePlay LastPlay = 16;
+  int64 Caller = 17;
+  int64 Landlord = 18;
+  uint32 BombCount = 19;
+  uint32 Spring = 20;
+  Rate Rate = 21;
+  repeated Sequence SequenceList = 22;
+}
+
+message Table {
+  Game Game = 1;
+  CreateTable Config = 2;
+  google.protobuf.Timestamp StartAt = 3;
+  google.protobuf.Timestamp EndAt = 4;
+  TableStatus TableStatus = 5;
+  int64 Owner = 6;
+  repeated User Users = 7;
+  repeated Game Games = 8;
+  uint32 GameNo = 9;
+  google.protobuf.Timestamp LastVoteTime = 10;
+  User LastVoteUser = 12;
+  bool VoteProcessing = 13;
+  google.protobuf.Timestamp VoteExpireTime = 14;
+}
