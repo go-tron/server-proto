@@ -231,6 +231,7 @@ message ServerPromote {
   uint32 CurrentRound = 3; //当前轮次
   uint32 Ranking = 4; //排名
   uint32 CurrentPeople = 5; //总人数
+  uint32 RemainingTable = 6; //剩余牌桌
 }
 
 message ServerRanking {
