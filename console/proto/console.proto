@@ -7,7 +7,11 @@ import "google/protobuf/timestamp.proto";
 
 option go_package = "../pb";
 
-//游戏状态
+service Dispatch {
+  rpc TableSrv (Client) returns (Result) {}
+  rpc MessageSrv (Message) returns (Result) {}
+}
+
 enum GameStatus {
   GameStatusUnspecified = 0;
   GameStatusStarted = 2; //已开局
@@ -124,3 +128,13 @@ message Table {
   bool VoteProcessing = 13;
   google.protobuf.Timestamp VoteExpireTime = 14;
 }
+
+message Table {
+
+}
+
+message TableList {
+  repeated Table Tables = 1;
+}
+
+
