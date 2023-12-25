@@ -10,7 +10,8 @@ option go_package = "../pb";
 service Table {
   rpc TableCountSrv (google.protobuf.Empty) returns (TableCount) {}
   rpc TableListSrv (google.protobuf.Empty) returns (TableList) {}
-  rpc TableGetSrv (TableGetReq) returns (TableVO) {}
+  rpc TableGetSrv (TableIdReq) returns (TableVO) {}
+  rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
 
 message TableCount {
@@ -21,7 +22,7 @@ message TableList {
   repeated TableListVO Tables = 1;
 }
 
-message TableGetReq {
+message TableIdReq {
   int64 TableId = 1;
 }
 

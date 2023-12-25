@@ -23,6 +23,7 @@ const (
 	Table_TableCountSrv_FullMethodName = "/game.data.Table/TableCountSrv"
 	Table_TableListSrv_FullMethodName  = "/game.data.Table/TableListSrv"
 	Table_TableGetSrv_FullMethodName   = "/game.data.Table/TableGetSrv"
+	Table_TableCloseSrv_FullMethodName = "/game.data.Table/TableCloseSrv"
 )
 
 // TableClient is the client API for Table service.
@@ -31,7 +32,8 @@ const (
 type TableClient interface {
 	TableCountSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TableCount, error)
 	TableListSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*TableList, error)
-	TableGetSrv(ctx context.Context, in *TableGetReq, opts ...grpc.CallOption) (*TableVO, error)
+	TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableVO, error)
+	TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type tableClient struct {
@@ -60,9 +62,18 @@ func (c *tableClient) TableListSrv(ctx context.Context, in *emptypb.Empty, opts 
 	return out, nil
 }
 
-func (c *tableClient) TableGetSrv(ctx context.Context, in *TableGetReq, opts ...grpc.CallOption) (*TableVO, error) {
+func (c *tableClient) TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableVO, error) {
 	out := new(TableVO)
 	err := c.cc.Invoke(ctx, Table_TableGetSrv_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *tableClient) TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Table_TableCloseSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -75,7 +86,8 @@ func (c *tableClient) TableGetSrv(ctx context.Context, in *TableGetReq, opts ...
 type TableServer interface {
 	TableCountSrv(context.Context, *emptypb.Empty) (*TableCount, error)
 	TableListSrv(context.Context, *emptypb.Empty) (*TableList, error)
-	TableGetSrv(context.Context, *TableGetReq) (*TableVO, error)
+	TableGetSrv(context.Context, *TableIdReq) (*TableVO, error)
+	TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error)
 	mustEmbedUnimplementedTableServer()
 }
 
@@ -89,8 +101,11 @@ func (UnimplementedTableServer) TableCountSrv(context.Context, *emptypb.Empty) (
 func (UnimplementedTableServer) TableListSrv(context.Context, *emptypb.Empty) (*TableList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableListSrv not implemented")
 }
-func (UnimplementedTableServer) TableGetSrv(context.Context, *TableGetReq) (*TableVO, error) {
+func (UnimplementedTableServer) TableGetSrv(context.Context, *TableIdReq) (*TableVO, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableGetSrv not implemented")
+}
+func (UnimplementedTableServer) TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method TableCloseSrv not implemented")
 }
 func (UnimplementedTableServer) mustEmbedUnimplementedTableServer() {}
 
@@ -142,7 +157,7 @@ func _Table_TableListSrv_Handler(srv interface{}, ctx context.Context, dec func(
 }
 
 func _Table_TableGetSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(TableGetReq)
+	in := new(TableIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
@@ -154,7 +169,25 @@ func _Table_TableGetSrv_Handler(srv interface{}, ctx context.Context, dec func(i
 		FullMethod: Table_TableGetSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).TableGetSrv(ctx, req.(*TableGetReq))
+		return srv.(TableServer).TableGetSrv(ctx, req.(*TableIdReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _Table_TableCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(TableIdReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(TableServer).TableCloseSrv(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Table_TableCloseSrv_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(TableServer).TableCloseSrv(ctx, req.(*TableIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -177,6 +210,10 @@ var Table_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "TableGetSrv",
 			Handler:    _Table_TableGetSrv_Handler,
+		},
+		{
+			MethodName: "TableCloseSrv",
+			Handler:    _Table_TableCloseSrv_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
