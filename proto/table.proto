@@ -8,10 +8,10 @@ import "google/protobuf/empty.proto";
 option go_package = "../pb";
 
 service Table {
-  rpc TableCountSrv (google.protobuf.Empty) returns (TableCount) {}
-  rpc TableListSrv (google.protobuf.Empty) returns (TableList) {}
-  rpc TableGetSrv (TableIdReq) returns (TableVO) {}
-  rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
+  rpc Count (google.protobuf.Empty) returns (TableCount) {}
+  rpc List (google.protobuf.Empty) returns (TableList) {}
+  rpc Get (TableIdReq) returns (TableVO) {}
+  rpc Close (TableIdReq) returns (google.protobuf.Empty) {}
 }
 
 message TableCount {

@@ -4,6 +4,6 @@ import "google/protobuf/empty.proto";
 option go_package = "../pb";
 
 service Node {
-  rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
-  rpc NodeCloseSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc Open (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc Close (google.protobuf.Empty) returns (google.protobuf.Empty) {}
 }

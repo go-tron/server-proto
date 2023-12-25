@@ -20,16 +20,16 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Node_NodeOpenSrv_FullMethodName  = "/Node/NodeOpenSrv"
-	Node_NodeCloseSrv_FullMethodName = "/Node/NodeCloseSrv"
+	Node_Open_FullMethodName  = "/Node/Open"
+	Node_Close_FullMethodName = "/Node/Close"
 )
 
 // NodeClient is the client API for Node service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NodeClient interface {
-	NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
-	NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Open(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
+	Close(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
 type nodeClient struct {
@@ -40,18 +40,18 @@ func NewNodeClient(cc grpc.ClientConnInterface) NodeClient {
 	return &nodeClient{cc}
 }
 
-func (c *nodeClient) NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *nodeClient) Open(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Node_NodeOpenSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Node_Open_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *nodeClient) NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *nodeClient) Close(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Node_NodeCloseSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, Node_Close_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,8 +62,8 @@ func (c *nodeClient) NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts .
 // All implementations must embed UnimplementedNodeServer
 // for forward compatibility
 type NodeServer interface {
-	NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
-	NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	Open(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
+	Close(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedNodeServer()
 }
 
@@ -71,11 +71,11 @@ type NodeServer interface {
 type UnimplementedNodeServer struct {
 }
 
-func (UnimplementedNodeServer) NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NodeOpenSrv not implemented")
+func (UnimplementedNodeServer) Open(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Open not implemented")
 }
-func (UnimplementedNodeServer) NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method NodeCloseSrv not implemented")
+func (UnimplementedNodeServer) Close(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Close not implemented")
 }
 func (UnimplementedNodeServer) mustEmbedUnimplementedNodeServer() {}
 
@@ -90,38 +90,38 @@ func RegisterNodeServer(s grpc.ServiceRegistrar, srv NodeServer) {
 	s.RegisterService(&Node_ServiceDesc, srv)
 }
 
-func _Node_NodeOpenSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Node_Open_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NodeServer).NodeOpenSrv(ctx, in)
+		return srv.(NodeServer).Open(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Node_NodeOpenSrv_FullMethodName,
+		FullMethod: Node_Open_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NodeServer).NodeOpenSrv(ctx, req.(*emptypb.Empty))
+		return srv.(NodeServer).Open(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Node_NodeCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _Node_Close_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(NodeServer).NodeCloseSrv(ctx, in)
+		return srv.(NodeServer).Close(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Node_NodeCloseSrv_FullMethodName,
+		FullMethod: Node_Close_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(NodeServer).NodeCloseSrv(ctx, req.(*emptypb.Empty))
+		return srv.(NodeServer).Close(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -134,12 +134,12 @@ var Node_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*NodeServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "NodeOpenSrv",
-			Handler:    _Node_NodeOpenSrv_Handler,
+			MethodName: "Open",
+			Handler:    _Node_Open_Handler,
 		},
 		{
-			MethodName: "NodeCloseSrv",
-			Handler:    _Node_NodeCloseSrv_Handler,
+			MethodName: "Close",
+			Handler:    _Node_Close_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
