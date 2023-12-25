@@ -24,7 +24,7 @@ message AssignUser {
   uint32 Rank = 9; //当前排名
 }
 
-message CreateTable {
+message TableConfig {
   repeated AssignUser AssignUsers = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
@@ -53,8 +53,6 @@ message CreateTable {
   bool WithBomb = 26; //是否带炸弹
   bool WithDouble = 27; //是否带加倍
   uint32 MaxRate = 28; //最大倍率
-  uint32 MinEntryGold = 29; //最少携带金币
-  uint32 MaxEntryGold = 30; //最多携带金币
 }
 
 message CreateTableResult {

@@ -29,7 +29,7 @@ const (
 	ServerCmd_ServerCmdItemUpdate    ServerCmd = 101 //资产变更 消息体 ServerItemUpdate
 	ServerCmd_ServerCmdMarquee       ServerCmd = 102 //跑马灯 消息体 ServerMarquee
 	ServerCmd_ServerCmdSignupRefresh ServerCmd = 103 //报名人数刷新 消息体 ServerSignupRefresh
-	ServerCmd_ServerCmdBagRefresh    ServerCmd = 104 //背包刷新 消息体 ServerCmdBagRefresh
+	ServerCmd_ServerCmdBagRefresh    ServerCmd = 104 //背包刷新 消息体 无
 	// 牌桌
 	ServerCmd_ServerCmdGoToJoin     ServerCmd = 1000 //服务端通知加入 消息体 ServerGoToJoin
 	ServerCmd_ServerCmdSelfJoin     ServerCmd = 1001 //自己加入 消息体 ServerSelfJoin
