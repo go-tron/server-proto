@@ -20,6 +20,7 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
+	Node_NodeOpenSrv_FullMethodName  = "/Node/NodeOpenSrv"
 	Node_NodeCloseSrv_FullMethodName = "/Node/NodeCloseSrv"
 )
 
@@ -27,6 +28,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type NodeClient interface {
+	NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
@@ -36,6 +38,15 @@ type nodeClient struct {
 
 func NewNodeClient(cc grpc.ClientConnInterface) NodeClient {
 	return &nodeClient{cc}
+}
+
+func (c *nodeClient) NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+	out := new(emptypb.Empty)
+	err := c.cc.Invoke(ctx, Node_NodeOpenSrv_FullMethodName, in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *nodeClient) NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
@@ -51,6 +62,7 @@ func (c *nodeClient) NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts .
 // All implementations must embed UnimplementedNodeServer
 // for forward compatibility
 type NodeServer interface {
+	NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	mustEmbedUnimplementedNodeServer()
 }
@@ -59,6 +71,9 @@ type NodeServer interface {
 type UnimplementedNodeServer struct {
 }
 
+func (UnimplementedNodeServer) NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method NodeOpenSrv not implemented")
+}
 func (UnimplementedNodeServer) NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeCloseSrv not implemented")
 }
@@ -73,6 +88,24 @@ type UnsafeNodeServer interface {
 
 func RegisterNodeServer(s grpc.ServiceRegistrar, srv NodeServer) {
 	s.RegisterService(&Node_ServiceDesc, srv)
+}
+
+func _Node_NodeOpenSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(emptypb.Empty)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(NodeServer).NodeOpenSrv(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: Node_NodeOpenSrv_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(NodeServer).NodeOpenSrv(ctx, req.(*emptypb.Empty))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _Node_NodeCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -100,6 +133,10 @@ var Node_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "Node",
 	HandlerType: (*NodeServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "NodeOpenSrv",
+			Handler:    _Node_NodeOpenSrv_Handler,
+		},
 		{
 			MethodName: "NodeCloseSrv",
 			Handler:    _Node_NodeCloseSrv_Handler,
