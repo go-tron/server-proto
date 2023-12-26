@@ -1,17 +1,20 @@
 syntax = "proto3";
 
-package game.data;
+package game.server;
 import "base.proto";
 import "control.proto";
 import "google/protobuf/empty.proto";
 
 option go_package = "../pb";
 
-service Table {
-  rpc Count (google.protobuf.Empty) returns (TableCount) {}
-  rpc List (google.protobuf.Empty) returns (TableList) {}
-  rpc Get (TableIdReq) returns (TableVO) {}
-  rpc Close (TableIdReq) returns (google.protobuf.Empty) {}
+service Game {
+  rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc NodeCloseSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
+  rpc TableCountSrv (google.protobuf.Empty) returns (TableCount) {}
+  rpc TableFindSrv (TableIdReq) returns (TableCount) {}
+  rpc TableListSrv (google.protobuf.Empty) returns (TableList) {}
+  rpc TableGetSrv (TableIdReq) returns (TableVO) {}
+  rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
 
 message TableCount {

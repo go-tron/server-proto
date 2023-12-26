@@ -1,9 +1,0 @@
-syntax = "proto3";
-
-import "google/protobuf/empty.proto";
-option go_package = "../pb";
-
-service Node {
-  rpc Open (google.protobuf.Empty) returns (google.protobuf.Empty) {}
-  rpc Close (google.protobuf.Empty) returns (google.protobuf.Empty) {}
-}
