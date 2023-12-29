@@ -100,3 +100,52 @@ message StartGame {
   uint32 GameConfigId = 1;
   int64 StartTime = 2;
 }
+
+message GameDO {
+  // @gotags: redis:"gameId"
+  int64 GameId = 1;
+  // @gotags: redis:"gameTypeId"
+  uint32 GameTypeId = 2;
+  // @gotags: redis:"gameCategoryId"
+  uint32 GameCategoryId = 3;
+  // @gotags: redis:"gameConfigId"
+  uint32 GameConfigId = 4;
+  // @gotags: redis:"gameRuleId"
+  uint32 GameRuleId = 5;
+  // @gotags: redis:"rounds"
+  uint32 Rounds = 6;
+  // @gotags: redis:"currentRound"
+  uint32 CurrentRound = 7;
+  // @gotags: redis:"people"
+  uint32 People = 8;
+  // @gotags: redis:"currentPeople"
+  uint32 CurrentPeople = 9;
+  // @gotags: redis:"roundId"
+  int64 RoundId = 10;
+  // @gotags: redis:"promotePeople"
+  uint32 PromotePeople = 11;
+  // @gotags: redis:"status"
+  uint32 Status = 12;
+  // @gotags: redis:"startAt"
+  int64 StartAt = 13;
+  // @gotags: redis:"endAt"
+  int64 EndAt = 14;
+}
+
+message GameSettle {
+  int64 StartTime = 1;
+  GameDO Game = 2;
+  repeated UserRank RankList = 3;
+}
+
+message UserRank {
+  int64 UserId = 1;
+  int64 Score = 2;
+  int64 Rank = 3;
+  bool Promote = 4;
+}
+
+message UserGameEnd {
+  GameDO Game = 1;
+  UserRank User = 2;
+}

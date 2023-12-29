@@ -83,6 +83,7 @@ enum CompetitionStatus {
   CompetitionStatusPlaying = 2; //打牌中
   CompetitionStatusWaitingTables = 3; //等待所有桌
   CompetitionStatusPromoting = 4; //轮次排名中
+  CompetitionStatusEnd = 5; //已结束
 }
 
 message UserCards {
