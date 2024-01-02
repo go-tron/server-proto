@@ -1,11 +1,11 @@
 syntax = "proto3";
 
-package game.server;
-import "base.proto";
-import "control.proto";
+package table_pb;
+import "game/base.proto";
+import "control/control.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "../pb";
+option go_package = "server-proto/pb/table;table_pb";
 
 service Table {
   rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
@@ -51,7 +51,7 @@ message GamePlay {
 message Sequence {
   string Time = 1;
   int64 User = 2;
-  Action Action = 3;
+  game_pb.Action Action = 3;
   int64 Timeout = 4;
   bool Reacted = 5;
 }
@@ -102,34 +102,34 @@ message DeckRecord {
 }
 
 message DeckVO {
-  int64 DeckId = 3;
-  uint32 DeckNo = 4;
-  string StartAt = 5;
-  string EndAt = 6;
-  repeated DeckRecord DeckRecords = 7;
-  DeckStatus DeckStatus = 8;
-  uint32 RateCalledTimes = 9;
-  int64 CurrentUser = 10;
-  int64 NextUser = 11;
-  string Cards = 12;
-  string HoldingCards = 13;
-  string PlayedCards = 14;
-  string HoleCards = 15;
-  GamePlay LastPlay = 16;
-  int64 Caller = 17;
-  int64 Landlord = 18;
-  uint32 BombCount = 19;
-  uint32 Spring = 20;
-  RateDetails RateDetails = 21;
-  repeated Sequence SequenceList = 22;
+  int64 DeckId = 1;
+  uint32 DeckNo = 2;
+  string StartAt = 3;
+  string EndAt = 4;
+  repeated DeckRecord DeckRecords = 5;
+  DeckStatus DeckStatus = 6;
+  uint32 RateCalledTimes = 7;
+  int64 CurrentUser = 8;
+  int64 NextUser = 9;
+  string Cards = 10;
+  string HoldingCards = 11;
+  string PlayedCards = 12;
+  string HoleCards = 13;
+  GamePlay LastPlay = 14;
+  int64 Caller = 15;
+  int64 Landlord = 16;
+  uint32 BombCount = 17;
+  uint32 Spring = 18;
+  game_pb.RateDetails RateDetails = 19;
+  repeated Sequence SequenceList = 20;
 }
 
 message TableVO {
   string NodeName = 1;
-  TableConfig Config = 2;
+  control_pb.TableConfig Config = 2;
   string CreatedAt = 3;
   uint64 Lifetime = 4; //存在时间
-  TableStatus TableStatus = 5;
+  game_pb.TableStatus TableStatus = 5;
   string StartAt = 6;
   uint32 DeckNo = 7;
   repeated UserVO Users = 8;
@@ -141,13 +141,22 @@ message TableListVO {
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
   int64 RoundId = 4; //轮次ID
-  GameType GameType = 5; //游戏类型
-  GameCategory GameCategory = 6; //游戏类别
+  game_pb.GameType GameType = 5; //游戏类型
+  game_pb.GameCategory GameCategory = 6; //游戏类别
   string Title = 7; //游戏标题
   string CreatedAt = 8;
   uint64 Lifetime = 9; //存在时间
-  TableStatus TableStatus = 10;
+  game_pb.TableStatus TableStatus = 10;
   string StartAt = 11;
   uint32 DeckNo = 12;
   repeated int64 Users = 13;
+}
+
+message TableEnd {
+  control_pb.TableConfig Config = 1;
+  string CreatedAt = 2;
+  string StartAt = 3;
+  string EndAt = 4;
+  repeated UserVO Users = 8;
+  repeated DeckVO Decks = 9;
 }

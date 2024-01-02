@@ -1,7 +1,8 @@
 syntax = "proto3";
-import "base.proto";
 
-option go_package = "../pb";
+package game_pb;
+import "base.proto";
+option go_package = "server-proto/pb/game;game_pb";
 
 enum ClientCmd {
   //通用

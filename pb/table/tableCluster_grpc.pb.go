@@ -4,7 +4,7 @@
 // - protoc             v4.24.4
 // source: tableCluster.proto
 
-package pb
+package table_pb
 
 import (
 	context "context"
@@ -20,13 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TableCluster_NodeListSrv_FullMethodName   = "/game.server.TableCluster/NodeListSrv"
-	TableCluster_NodeOpenSrv_FullMethodName   = "/game.server.TableCluster/NodeOpenSrv"
-	TableCluster_NodeCloseSrv_FullMethodName  = "/game.server.TableCluster/NodeCloseSrv"
-	TableCluster_TableCountSrv_FullMethodName = "/game.server.TableCluster/TableCountSrv"
-	TableCluster_TableListSrv_FullMethodName  = "/game.server.TableCluster/TableListSrv"
-	TableCluster_TableGetSrv_FullMethodName   = "/game.server.TableCluster/TableGetSrv"
-	TableCluster_TableCloseSrv_FullMethodName = "/game.server.TableCluster/TableCloseSrv"
+	TableCluster_NodeListSrv_FullMethodName   = "/table_pb.TableCluster/NodeListSrv"
+	TableCluster_NodeOpenSrv_FullMethodName   = "/table_pb.TableCluster/NodeOpenSrv"
+	TableCluster_NodeCloseSrv_FullMethodName  = "/table_pb.TableCluster/NodeCloseSrv"
+	TableCluster_TableCountSrv_FullMethodName = "/table_pb.TableCluster/TableCountSrv"
+	TableCluster_TableListSrv_FullMethodName  = "/table_pb.TableCluster/TableListSrv"
+	TableCluster_TableGetSrv_FullMethodName   = "/table_pb.TableCluster/TableGetSrv"
+	TableCluster_TableCloseSrv_FullMethodName = "/table_pb.TableCluster/TableCloseSrv"
 )
 
 // TableClusterClient is the client API for TableCluster service.
@@ -295,7 +295,7 @@ func _TableCluster_TableCloseSrv_Handler(srv interface{}, ctx context.Context, d
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var TableCluster_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "game.server.TableCluster",
+	ServiceName: "table_pb.TableCluster",
 	HandlerType: (*TableClusterServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

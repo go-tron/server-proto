@@ -1,6 +1,7 @@
 syntax = "proto3";
 
-option go_package = "../pb";
+package game_pb;
+option go_package = "server-proto/pb/game;game_pb";
 
 //游戏类型
 enum GameType {

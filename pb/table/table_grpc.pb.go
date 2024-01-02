@@ -4,7 +4,7 @@
 // - protoc             v4.24.4
 // source: table.proto
 
-package pb
+package table_pb
 
 import (
 	context "context"
@@ -20,13 +20,13 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Table_NodeOpenSrv_FullMethodName   = "/game.server.Table/NodeOpenSrv"
-	Table_NodeCloseSrv_FullMethodName  = "/game.server.Table/NodeCloseSrv"
-	Table_TableFindSrv_FullMethodName  = "/game.server.Table/TableFindSrv"
-	Table_TableCountSrv_FullMethodName = "/game.server.Table/TableCountSrv"
-	Table_TableListSrv_FullMethodName  = "/game.server.Table/TableListSrv"
-	Table_TableGetSrv_FullMethodName   = "/game.server.Table/TableGetSrv"
-	Table_TableCloseSrv_FullMethodName = "/game.server.Table/TableCloseSrv"
+	Table_NodeOpenSrv_FullMethodName   = "/table_pb.Table/NodeOpenSrv"
+	Table_NodeCloseSrv_FullMethodName  = "/table_pb.Table/NodeCloseSrv"
+	Table_TableFindSrv_FullMethodName  = "/table_pb.Table/TableFindSrv"
+	Table_TableCountSrv_FullMethodName = "/table_pb.Table/TableCountSrv"
+	Table_TableListSrv_FullMethodName  = "/table_pb.Table/TableListSrv"
+	Table_TableGetSrv_FullMethodName   = "/table_pb.Table/TableGetSrv"
+	Table_TableCloseSrv_FullMethodName = "/table_pb.Table/TableCloseSrv"
 )
 
 // TableClient is the client API for Table service.
@@ -295,7 +295,7 @@ func _Table_TableCloseSrv_Handler(srv interface{}, ctx context.Context, dec func
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var Table_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "game.server.Table",
+	ServiceName: "table_pb.Table",
 	HandlerType: (*TableServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{

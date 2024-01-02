@@ -1,7 +1,9 @@
 syntax = "proto3";
-import "base.proto";
 
-option go_package = "../pb";
+package user_pb;
+import "game/base.proto";
+
+option go_package = "server-proto/pb/user;user_pb";
 
 //用户状态
 enum UserAction {
@@ -16,8 +18,8 @@ message UserState {
   int64 UserId = 1;
   UserAction UserAction = 2;
   string GameId = 3;
-  GameType GameType = 4; //游戏类型
-  GameCategory GameCategory = 5; //游戏类别
+  game_pb.GameType GameType = 4; //游戏类型
+  game_pb.GameCategory GameCategory = 5; //游戏类别
   uint32 GameConfigId = 6;
   string TableId = 7;
 }

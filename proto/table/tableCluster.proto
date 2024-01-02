@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package game.server;
-import "table.proto";
+package table_pb;
 import "google/protobuf/empty.proto";
+import "table.proto";
 
-option go_package = "../pb";
+option go_package = "server-proto/pb/table;table_pb";
 
 service TableCluster {
   rpc NodeListSrv (google.protobuf.Empty) returns (NodeList) {}
