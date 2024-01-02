@@ -7,12 +7,12 @@ import "google/protobuf/empty.proto";
 
 option go_package = "../pb";
 
-service Game {
+service Table {
   rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
-  rpc TableCountSrv (google.protobuf.Empty) returns (TableCount) {}
   rpc TableFindSrv (TableIdReq) returns (TableCount) {}
-  rpc TableListSrv (google.protobuf.Empty) returns (TableList) {}
+  rpc TableCountSrv (TableQueryReq) returns (TableCount) {}
+  rpc TableListSrv (TableQueryReq) returns (TableList) {}
   rpc TableGetSrv (TableIdReq) returns (TableVO) {}
   rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
@@ -29,13 +29,18 @@ message TableIdReq {
   int64 TableId = 1;
 }
 
-enum GameStatus {
-  GameStatusUnspecified = 0;
-  GameStatusStarted = 2; //已开局
-  GameStatusCallRate = 3; //叫分中
-  GameStatusCallDouble = 4; //叫加倍中
-  GameStatusPlaying = 5; //出牌中
-  GameStatusDeckEnd = 6; //本副牌结算中
+message TableQueryReq {
+  string NodeName = 1;
+  int64 GameId = 2;
+}
+
+enum PhraseStatus {
+  PhraseStatusUnspecified = 0;
+  PhraseStatusStarted = 2; //已开局
+  PhraseStatusCallRate = 3; //叫分中
+  PhraseStatusCallDouble = 4; //叫加倍中
+  PhraseStatusPlaying = 5; //出牌中
+  PhraseStatusEnd = 6; //结束
 }
 
 message GamePlay {
@@ -68,7 +73,7 @@ message UserVO {
   int32 Rank = 15;
   bool Entered = 16;
   bool Landlord = 17;
-  int32 DeckScore = 18;
+  int32 PhraseScore = 18;
   int32 TableScore = 20;
   uint32 BaseRate = 21;
   bool BaseRateCalled = 22;
@@ -85,7 +90,7 @@ message UserVO {
   uint32 VoteState = 33;
 }
 
-message GameRecord {
+message PhraseRecord {
   int64 id = 1;
   int64 User = 2;
   string Cards = 3;
@@ -95,13 +100,13 @@ message GameRecord {
   int32 EndScore = 7;
 }
 
-message GameVO {
-  int64 DeckId = 3;
-  uint32 DeckNo = 4;
+message Phrase {
+  int64 PhraseId = 3;
+  uint32 PhraseNo = 4;
   string StartAt = 5;
   string EndAt = 6;
-  repeated GameRecord GameRecords = 7;
-  GameStatus GameStatus = 8;
+  repeated PhraseRecord PhraseRecords = 7;
+  PhraseStatus PhraseStatus = 8;
   uint32 RateCalledTimes = 9;
   int64 CurrentUser = 10;
   int64 NextUser = 11;
@@ -119,25 +124,29 @@ message GameVO {
 }
 
 message TableVO {
-  TableConfig Config = 1;
-  string StartAt = 2;
-  uint64 Lifetime = 3; //存在时间
-  TableStatus TableStatus = 4;
-  uint32 DeckNo = 5;
-  repeated UserVO Users = 6;
-  repeated GameVO Games = 7;
+  string NodeName = 1;
+  TableConfig Config = 2;
+  string CreatedAt = 3;
+  uint64 Lifetime = 4; //存在时间
+  TableStatus TableStatus = 5;
+  string StartAt = 6;
+  uint32 PhraseNo = 7;
+  repeated UserVO Users = 8;
+  repeated Phrase Phrases = 9;
 }
 
 message TableListVO {
-  int64 GameId = 1; //游戏ID
-  int64 TableId = 2; //牌桌ID
-  int64 RoundId = 3; //轮次ID
-  GameType GameType = 4; //游戏类型
-  GameCategory GameCategory = 5; //游戏类别
-  string Title = 6; //游戏标题
-  string StartAt = 7;
-  uint64 Lifetime = 8; //存在时间
-  TableStatus TableStatus = 9;
-  uint32 DeckNo = 10;
-  repeated int64 Users = 11;
+  string NodeName = 1;
+  int64 GameId = 2; //游戏ID
+  int64 TableId = 3; //牌桌ID
+  int64 RoundId = 4; //轮次ID
+  GameType GameType = 5; //游戏类型
+  GameCategory GameCategory = 6; //游戏类别
+  string Title = 7; //游戏标题
+  string CreatedAt = 8;
+  uint64 Lifetime = 9; //存在时间
+  TableStatus TableStatus = 10;
+  string StartAt = 11;
+  uint32 PhraseNo = 12;
+  repeated int64 Users = 13;
 }

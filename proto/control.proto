@@ -96,7 +96,7 @@ message QuitTable {
   GameCategory GameCategory = 6; //游戏类别
 }
 
-message StartGame {
+message TimedStart {
   uint32 GameConfigId = 1;
   int64 StartTime = 2;
 }

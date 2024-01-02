@@ -1,17 +1,17 @@
 syntax = "proto3";
 
 package game.server;
-import "game.proto";
+import "table.proto";
 import "google/protobuf/empty.proto";
 
 option go_package = "../pb";
 
-service GameCluster {
+service TableCluster {
   rpc NodeListSrv (google.protobuf.Empty) returns (NodeList) {}
   rpc NodeOpenSrv (NodeNameReq) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (NodeNameReq) returns (google.protobuf.Empty) {}
-  rpc TableCountSrv (NodeNameReq) returns (TableCount) {}
-  rpc TableListSrv (NodeNameReq) returns (TableList) {}
+  rpc TableCountSrv (TableQueryReq) returns (TableCount) {}
+  rpc TableListSrv (TableQueryReq) returns (TableList) {}
   rpc TableGetSrv (TableIdReq) returns (TableVO) {}
   rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
