@@ -7,13 +7,13 @@ import "google/protobuf/empty.proto";
 
 option go_package = "server-proto/pb/table;table_pb";
 
-service Table {
+service TableSrv {
   rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc TableFindSrv (TableIdReq) returns (TableCount) {}
   rpc TableCountSrv (TableQueryReq) returns (TableCount) {}
   rpc TableListSrv (TableQueryReq) returns (TableList) {}
-  rpc TableGetSrv (TableIdReq) returns (TableVO) {}
+  rpc TableGetSrv (TableIdReq) returns (Table) {}
   rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
 
@@ -22,7 +22,7 @@ message TableCount {
 }
 
 message TableList {
-  repeated TableListVO Tables = 1;
+  repeated TableVO Tables = 1;
 }
 
 message TableIdReq {
@@ -56,7 +56,7 @@ message Sequence {
   bool Reacted = 5;
 }
 
-message UserVO {
+message User {
   bool Robot = 1;
   int64 UserId = 2;
   string UserNo = 3;
@@ -101,7 +101,7 @@ message DeckRecord {
   int32 EndScore = 8;
 }
 
-message DeckVO {
+message Deck {
   int64 DeckId = 1;
   uint32 DeckNo = 2;
   string StartAt = 3;
@@ -124,7 +124,7 @@ message DeckVO {
   repeated Sequence SequenceList = 20;
 }
 
-message TableVO {
+message Table {
   string NodeName = 1;
   control_pb.TableConfig Config = 2;
   string CreatedAt = 3;
@@ -132,11 +132,11 @@ message TableVO {
   game_pb.TableStatus TableStatus = 5;
   string StartAt = 6;
   uint32 DeckNo = 7;
-  repeated UserVO Users = 8;
-  repeated DeckVO Decks = 9;
+  repeated User Users = 8;
+  repeated Deck Decks = 9;
 }
 
-message TableListVO {
+message TableVO {
   string NodeName = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
@@ -157,6 +157,6 @@ message TableEnd {
   string CreatedAt = 2;
   string StartAt = 3;
   string EndAt = 4;
-  repeated UserVO Users = 8;
-  repeated DeckVO Decks = 9;
+  repeated User Users = 8;
+  repeated Deck Decks = 9;
 }

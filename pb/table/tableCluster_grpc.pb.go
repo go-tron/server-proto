@@ -20,311 +20,311 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	TableCluster_NodeListSrv_FullMethodName   = "/table_pb.TableCluster/NodeListSrv"
-	TableCluster_NodeOpenSrv_FullMethodName   = "/table_pb.TableCluster/NodeOpenSrv"
-	TableCluster_NodeCloseSrv_FullMethodName  = "/table_pb.TableCluster/NodeCloseSrv"
-	TableCluster_TableCountSrv_FullMethodName = "/table_pb.TableCluster/TableCountSrv"
-	TableCluster_TableListSrv_FullMethodName  = "/table_pb.TableCluster/TableListSrv"
-	TableCluster_TableGetSrv_FullMethodName   = "/table_pb.TableCluster/TableGetSrv"
-	TableCluster_TableCloseSrv_FullMethodName = "/table_pb.TableCluster/TableCloseSrv"
+	TableClusterSrv_NodeListSrv_FullMethodName   = "/table_pb.TableClusterSrv/NodeListSrv"
+	TableClusterSrv_NodeOpenSrv_FullMethodName   = "/table_pb.TableClusterSrv/NodeOpenSrv"
+	TableClusterSrv_NodeCloseSrv_FullMethodName  = "/table_pb.TableClusterSrv/NodeCloseSrv"
+	TableClusterSrv_TableCountSrv_FullMethodName = "/table_pb.TableClusterSrv/TableCountSrv"
+	TableClusterSrv_TableListSrv_FullMethodName  = "/table_pb.TableClusterSrv/TableListSrv"
+	TableClusterSrv_TableGetSrv_FullMethodName   = "/table_pb.TableClusterSrv/TableGetSrv"
+	TableClusterSrv_TableCloseSrv_FullMethodName = "/table_pb.TableClusterSrv/TableCloseSrv"
 )
 
-// TableClusterClient is the client API for TableCluster service.
+// TableClusterSrvClient is the client API for TableClusterSrv service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TableClusterClient interface {
+type TableClusterSrvClient interface {
 	NodeListSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NodeList, error)
 	NodeOpenSrv(ctx context.Context, in *NodeNameReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NodeCloseSrv(ctx context.Context, in *NodeNameReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	TableCountSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableCount, error)
 	TableListSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableList, error)
-	TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableVO, error)
+	TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*Table, error)
 	TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
-type tableClusterClient struct {
+type tableClusterSrvClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTableClusterClient(cc grpc.ClientConnInterface) TableClusterClient {
-	return &tableClusterClient{cc}
+func NewTableClusterSrvClient(cc grpc.ClientConnInterface) TableClusterSrvClient {
+	return &tableClusterSrvClient{cc}
 }
 
-func (c *tableClusterClient) NodeListSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NodeList, error) {
+func (c *tableClusterSrvClient) NodeListSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*NodeList, error) {
 	out := new(NodeList)
-	err := c.cc.Invoke(ctx, TableCluster_NodeListSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableClusterSrv_NodeListSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClusterClient) NodeOpenSrv(ctx context.Context, in *NodeNameReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tableClusterSrvClient) NodeOpenSrv(ctx context.Context, in *NodeNameReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, TableCluster_NodeOpenSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableClusterSrv_NodeOpenSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClusterClient) NodeCloseSrv(ctx context.Context, in *NodeNameReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tableClusterSrvClient) NodeCloseSrv(ctx context.Context, in *NodeNameReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, TableCluster_NodeCloseSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableClusterSrv_NodeCloseSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClusterClient) TableCountSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableCount, error) {
+func (c *tableClusterSrvClient) TableCountSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableCount, error) {
 	out := new(TableCount)
-	err := c.cc.Invoke(ctx, TableCluster_TableCountSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableClusterSrv_TableCountSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClusterClient) TableListSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableList, error) {
+func (c *tableClusterSrvClient) TableListSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableList, error) {
 	out := new(TableList)
-	err := c.cc.Invoke(ctx, TableCluster_TableListSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableClusterSrv_TableListSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClusterClient) TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableVO, error) {
-	out := new(TableVO)
-	err := c.cc.Invoke(ctx, TableCluster_TableGetSrv_FullMethodName, in, out, opts...)
+func (c *tableClusterSrvClient) TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*Table, error) {
+	out := new(Table)
+	err := c.cc.Invoke(ctx, TableClusterSrv_TableGetSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClusterClient) TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tableClusterSrvClient) TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, TableCluster_TableCloseSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableClusterSrv_TableCloseSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TableClusterServer is the server API for TableCluster service.
-// All implementations must embed UnimplementedTableClusterServer
+// TableClusterSrvServer is the server API for TableClusterSrv service.
+// All implementations must embed UnimplementedTableClusterSrvServer
 // for forward compatibility
-type TableClusterServer interface {
+type TableClusterSrvServer interface {
 	NodeListSrv(context.Context, *emptypb.Empty) (*NodeList, error)
 	NodeOpenSrv(context.Context, *NodeNameReq) (*emptypb.Empty, error)
 	NodeCloseSrv(context.Context, *NodeNameReq) (*emptypb.Empty, error)
 	TableCountSrv(context.Context, *TableQueryReq) (*TableCount, error)
 	TableListSrv(context.Context, *TableQueryReq) (*TableList, error)
-	TableGetSrv(context.Context, *TableIdReq) (*TableVO, error)
+	TableGetSrv(context.Context, *TableIdReq) (*Table, error)
 	TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error)
-	mustEmbedUnimplementedTableClusterServer()
+	mustEmbedUnimplementedTableClusterSrvServer()
 }
 
-// UnimplementedTableClusterServer must be embedded to have forward compatible implementations.
-type UnimplementedTableClusterServer struct {
+// UnimplementedTableClusterSrvServer must be embedded to have forward compatible implementations.
+type UnimplementedTableClusterSrvServer struct {
 }
 
-func (UnimplementedTableClusterServer) NodeListSrv(context.Context, *emptypb.Empty) (*NodeList, error) {
+func (UnimplementedTableClusterSrvServer) NodeListSrv(context.Context, *emptypb.Empty) (*NodeList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeListSrv not implemented")
 }
-func (UnimplementedTableClusterServer) NodeOpenSrv(context.Context, *NodeNameReq) (*emptypb.Empty, error) {
+func (UnimplementedTableClusterSrvServer) NodeOpenSrv(context.Context, *NodeNameReq) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeOpenSrv not implemented")
 }
-func (UnimplementedTableClusterServer) NodeCloseSrv(context.Context, *NodeNameReq) (*emptypb.Empty, error) {
+func (UnimplementedTableClusterSrvServer) NodeCloseSrv(context.Context, *NodeNameReq) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeCloseSrv not implemented")
 }
-func (UnimplementedTableClusterServer) TableCountSrv(context.Context, *TableQueryReq) (*TableCount, error) {
+func (UnimplementedTableClusterSrvServer) TableCountSrv(context.Context, *TableQueryReq) (*TableCount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableCountSrv not implemented")
 }
-func (UnimplementedTableClusterServer) TableListSrv(context.Context, *TableQueryReq) (*TableList, error) {
+func (UnimplementedTableClusterSrvServer) TableListSrv(context.Context, *TableQueryReq) (*TableList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableListSrv not implemented")
 }
-func (UnimplementedTableClusterServer) TableGetSrv(context.Context, *TableIdReq) (*TableVO, error) {
+func (UnimplementedTableClusterSrvServer) TableGetSrv(context.Context, *TableIdReq) (*Table, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableGetSrv not implemented")
 }
-func (UnimplementedTableClusterServer) TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error) {
+func (UnimplementedTableClusterSrvServer) TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableCloseSrv not implemented")
 }
-func (UnimplementedTableClusterServer) mustEmbedUnimplementedTableClusterServer() {}
+func (UnimplementedTableClusterSrvServer) mustEmbedUnimplementedTableClusterSrvServer() {}
 
-// UnsafeTableClusterServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TableClusterServer will
+// UnsafeTableClusterSrvServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TableClusterSrvServer will
 // result in compilation errors.
-type UnsafeTableClusterServer interface {
-	mustEmbedUnimplementedTableClusterServer()
+type UnsafeTableClusterSrvServer interface {
+	mustEmbedUnimplementedTableClusterSrvServer()
 }
 
-func RegisterTableClusterServer(s grpc.ServiceRegistrar, srv TableClusterServer) {
-	s.RegisterService(&TableCluster_ServiceDesc, srv)
+func RegisterTableClusterSrvServer(s grpc.ServiceRegistrar, srv TableClusterSrvServer) {
+	s.RegisterService(&TableClusterSrv_ServiceDesc, srv)
 }
 
-func _TableCluster_NodeListSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_NodeListSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).NodeListSrv(ctx, in)
+		return srv.(TableClusterSrvServer).NodeListSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_NodeListSrv_FullMethodName,
+		FullMethod: TableClusterSrv_NodeListSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).NodeListSrv(ctx, req.(*emptypb.Empty))
+		return srv.(TableClusterSrvServer).NodeListSrv(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TableCluster_NodeOpenSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_NodeOpenSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NodeNameReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).NodeOpenSrv(ctx, in)
+		return srv.(TableClusterSrvServer).NodeOpenSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_NodeOpenSrv_FullMethodName,
+		FullMethod: TableClusterSrv_NodeOpenSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).NodeOpenSrv(ctx, req.(*NodeNameReq))
+		return srv.(TableClusterSrvServer).NodeOpenSrv(ctx, req.(*NodeNameReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TableCluster_NodeCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_NodeCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(NodeNameReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).NodeCloseSrv(ctx, in)
+		return srv.(TableClusterSrvServer).NodeCloseSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_NodeCloseSrv_FullMethodName,
+		FullMethod: TableClusterSrv_NodeCloseSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).NodeCloseSrv(ctx, req.(*NodeNameReq))
+		return srv.(TableClusterSrvServer).NodeCloseSrv(ctx, req.(*NodeNameReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TableCluster_TableCountSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_TableCountSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableQueryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).TableCountSrv(ctx, in)
+		return srv.(TableClusterSrvServer).TableCountSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_TableCountSrv_FullMethodName,
+		FullMethod: TableClusterSrv_TableCountSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).TableCountSrv(ctx, req.(*TableQueryReq))
+		return srv.(TableClusterSrvServer).TableCountSrv(ctx, req.(*TableQueryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TableCluster_TableListSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_TableListSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableQueryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).TableListSrv(ctx, in)
+		return srv.(TableClusterSrvServer).TableListSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_TableListSrv_FullMethodName,
+		FullMethod: TableClusterSrv_TableListSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).TableListSrv(ctx, req.(*TableQueryReq))
+		return srv.(TableClusterSrvServer).TableListSrv(ctx, req.(*TableQueryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TableCluster_TableGetSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_TableGetSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).TableGetSrv(ctx, in)
+		return srv.(TableClusterSrvServer).TableGetSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_TableGetSrv_FullMethodName,
+		FullMethod: TableClusterSrv_TableGetSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).TableGetSrv(ctx, req.(*TableIdReq))
+		return srv.(TableClusterSrvServer).TableGetSrv(ctx, req.(*TableIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _TableCluster_TableCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableClusterSrv_TableCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableClusterServer).TableCloseSrv(ctx, in)
+		return srv.(TableClusterSrvServer).TableCloseSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: TableCluster_TableCloseSrv_FullMethodName,
+		FullMethod: TableClusterSrv_TableCloseSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableClusterServer).TableCloseSrv(ctx, req.(*TableIdReq))
+		return srv.(TableClusterSrvServer).TableCloseSrv(ctx, req.(*TableIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// TableCluster_ServiceDesc is the grpc.ServiceDesc for TableCluster service.
+// TableClusterSrv_ServiceDesc is the grpc.ServiceDesc for TableClusterSrv service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var TableCluster_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "table_pb.TableCluster",
-	HandlerType: (*TableClusterServer)(nil),
+var TableClusterSrv_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "table_pb.TableClusterSrv",
+	HandlerType: (*TableClusterSrvServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "NodeListSrv",
-			Handler:    _TableCluster_NodeListSrv_Handler,
+			Handler:    _TableClusterSrv_NodeListSrv_Handler,
 		},
 		{
 			MethodName: "NodeOpenSrv",
-			Handler:    _TableCluster_NodeOpenSrv_Handler,
+			Handler:    _TableClusterSrv_NodeOpenSrv_Handler,
 		},
 		{
 			MethodName: "NodeCloseSrv",
-			Handler:    _TableCluster_NodeCloseSrv_Handler,
+			Handler:    _TableClusterSrv_NodeCloseSrv_Handler,
 		},
 		{
 			MethodName: "TableCountSrv",
-			Handler:    _TableCluster_TableCountSrv_Handler,
+			Handler:    _TableClusterSrv_TableCountSrv_Handler,
 		},
 		{
 			MethodName: "TableListSrv",
-			Handler:    _TableCluster_TableListSrv_Handler,
+			Handler:    _TableClusterSrv_TableListSrv_Handler,
 		},
 		{
 			MethodName: "TableGetSrv",
-			Handler:    _TableCluster_TableGetSrv_Handler,
+			Handler:    _TableClusterSrv_TableGetSrv_Handler,
 		},
 		{
 			MethodName: "TableCloseSrv",
-			Handler:    _TableCluster_TableCloseSrv_Handler,
+			Handler:    _TableClusterSrv_TableCloseSrv_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

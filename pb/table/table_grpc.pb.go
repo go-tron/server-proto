@@ -20,311 +20,311 @@ import (
 const _ = grpc.SupportPackageIsVersion7
 
 const (
-	Table_NodeOpenSrv_FullMethodName   = "/table_pb.Table/NodeOpenSrv"
-	Table_NodeCloseSrv_FullMethodName  = "/table_pb.Table/NodeCloseSrv"
-	Table_TableFindSrv_FullMethodName  = "/table_pb.Table/TableFindSrv"
-	Table_TableCountSrv_FullMethodName = "/table_pb.Table/TableCountSrv"
-	Table_TableListSrv_FullMethodName  = "/table_pb.Table/TableListSrv"
-	Table_TableGetSrv_FullMethodName   = "/table_pb.Table/TableGetSrv"
-	Table_TableCloseSrv_FullMethodName = "/table_pb.Table/TableCloseSrv"
+	TableSrv_NodeOpenSrv_FullMethodName   = "/table_pb.TableSrv/NodeOpenSrv"
+	TableSrv_NodeCloseSrv_FullMethodName  = "/table_pb.TableSrv/NodeCloseSrv"
+	TableSrv_TableFindSrv_FullMethodName  = "/table_pb.TableSrv/TableFindSrv"
+	TableSrv_TableCountSrv_FullMethodName = "/table_pb.TableSrv/TableCountSrv"
+	TableSrv_TableListSrv_FullMethodName  = "/table_pb.TableSrv/TableListSrv"
+	TableSrv_TableGetSrv_FullMethodName   = "/table_pb.TableSrv/TableGetSrv"
+	TableSrv_TableCloseSrv_FullMethodName = "/table_pb.TableSrv/TableCloseSrv"
 )
 
-// TableClient is the client API for Table service.
+// TableSrvClient is the client API for TableSrv service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type TableClient interface {
+type TableSrvClient interface {
 	NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	TableFindSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableCount, error)
 	TableCountSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableCount, error)
 	TableListSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableList, error)
-	TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableVO, error)
+	TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*Table, error)
 	TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error)
 }
 
-type tableClient struct {
+type tableSrvClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewTableClient(cc grpc.ClientConnInterface) TableClient {
-	return &tableClient{cc}
+func NewTableSrvClient(cc grpc.ClientConnInterface) TableSrvClient {
+	return &tableSrvClient{cc}
 }
 
-func (c *tableClient) NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tableSrvClient) NodeOpenSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Table_NodeOpenSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableSrv_NodeOpenSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClient) NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tableSrvClient) NodeCloseSrv(ctx context.Context, in *emptypb.Empty, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Table_NodeCloseSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableSrv_NodeCloseSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClient) TableFindSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableCount, error) {
+func (c *tableSrvClient) TableFindSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableCount, error) {
 	out := new(TableCount)
-	err := c.cc.Invoke(ctx, Table_TableFindSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableSrv_TableFindSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClient) TableCountSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableCount, error) {
+func (c *tableSrvClient) TableCountSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableCount, error) {
 	out := new(TableCount)
-	err := c.cc.Invoke(ctx, Table_TableCountSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableSrv_TableCountSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClient) TableListSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableList, error) {
+func (c *tableSrvClient) TableListSrv(ctx context.Context, in *TableQueryReq, opts ...grpc.CallOption) (*TableList, error) {
 	out := new(TableList)
-	err := c.cc.Invoke(ctx, Table_TableListSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableSrv_TableListSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClient) TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*TableVO, error) {
-	out := new(TableVO)
-	err := c.cc.Invoke(ctx, Table_TableGetSrv_FullMethodName, in, out, opts...)
+func (c *tableSrvClient) TableGetSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*Table, error) {
+	out := new(Table)
+	err := c.cc.Invoke(ctx, TableSrv_TableGetSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *tableClient) TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
+func (c *tableSrvClient) TableCloseSrv(ctx context.Context, in *TableIdReq, opts ...grpc.CallOption) (*emptypb.Empty, error) {
 	out := new(emptypb.Empty)
-	err := c.cc.Invoke(ctx, Table_TableCloseSrv_FullMethodName, in, out, opts...)
+	err := c.cc.Invoke(ctx, TableSrv_TableCloseSrv_FullMethodName, in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// TableServer is the server API for Table service.
-// All implementations must embed UnimplementedTableServer
+// TableSrvServer is the server API for TableSrv service.
+// All implementations must embed UnimplementedTableSrvServer
 // for forward compatibility
-type TableServer interface {
+type TableSrvServer interface {
 	NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error)
 	TableFindSrv(context.Context, *TableIdReq) (*TableCount, error)
 	TableCountSrv(context.Context, *TableQueryReq) (*TableCount, error)
 	TableListSrv(context.Context, *TableQueryReq) (*TableList, error)
-	TableGetSrv(context.Context, *TableIdReq) (*TableVO, error)
+	TableGetSrv(context.Context, *TableIdReq) (*Table, error)
 	TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error)
-	mustEmbedUnimplementedTableServer()
+	mustEmbedUnimplementedTableSrvServer()
 }
 
-// UnimplementedTableServer must be embedded to have forward compatible implementations.
-type UnimplementedTableServer struct {
+// UnimplementedTableSrvServer must be embedded to have forward compatible implementations.
+type UnimplementedTableSrvServer struct {
 }
 
-func (UnimplementedTableServer) NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedTableSrvServer) NodeOpenSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeOpenSrv not implemented")
 }
-func (UnimplementedTableServer) NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
+func (UnimplementedTableSrvServer) NodeCloseSrv(context.Context, *emptypb.Empty) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method NodeCloseSrv not implemented")
 }
-func (UnimplementedTableServer) TableFindSrv(context.Context, *TableIdReq) (*TableCount, error) {
+func (UnimplementedTableSrvServer) TableFindSrv(context.Context, *TableIdReq) (*TableCount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableFindSrv not implemented")
 }
-func (UnimplementedTableServer) TableCountSrv(context.Context, *TableQueryReq) (*TableCount, error) {
+func (UnimplementedTableSrvServer) TableCountSrv(context.Context, *TableQueryReq) (*TableCount, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableCountSrv not implemented")
 }
-func (UnimplementedTableServer) TableListSrv(context.Context, *TableQueryReq) (*TableList, error) {
+func (UnimplementedTableSrvServer) TableListSrv(context.Context, *TableQueryReq) (*TableList, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableListSrv not implemented")
 }
-func (UnimplementedTableServer) TableGetSrv(context.Context, *TableIdReq) (*TableVO, error) {
+func (UnimplementedTableSrvServer) TableGetSrv(context.Context, *TableIdReq) (*Table, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableGetSrv not implemented")
 }
-func (UnimplementedTableServer) TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error) {
+func (UnimplementedTableSrvServer) TableCloseSrv(context.Context, *TableIdReq) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method TableCloseSrv not implemented")
 }
-func (UnimplementedTableServer) mustEmbedUnimplementedTableServer() {}
+func (UnimplementedTableSrvServer) mustEmbedUnimplementedTableSrvServer() {}
 
-// UnsafeTableServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to TableServer will
+// UnsafeTableSrvServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to TableSrvServer will
 // result in compilation errors.
-type UnsafeTableServer interface {
-	mustEmbedUnimplementedTableServer()
+type UnsafeTableSrvServer interface {
+	mustEmbedUnimplementedTableSrvServer()
 }
 
-func RegisterTableServer(s grpc.ServiceRegistrar, srv TableServer) {
-	s.RegisterService(&Table_ServiceDesc, srv)
+func RegisterTableSrvServer(s grpc.ServiceRegistrar, srv TableSrvServer) {
+	s.RegisterService(&TableSrv_ServiceDesc, srv)
 }
 
-func _Table_NodeOpenSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_NodeOpenSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).NodeOpenSrv(ctx, in)
+		return srv.(TableSrvServer).NodeOpenSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_NodeOpenSrv_FullMethodName,
+		FullMethod: TableSrv_NodeOpenSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).NodeOpenSrv(ctx, req.(*emptypb.Empty))
+		return srv.(TableSrvServer).NodeOpenSrv(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Table_NodeCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_NodeCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(emptypb.Empty)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).NodeCloseSrv(ctx, in)
+		return srv.(TableSrvServer).NodeCloseSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_NodeCloseSrv_FullMethodName,
+		FullMethod: TableSrv_NodeCloseSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).NodeCloseSrv(ctx, req.(*emptypb.Empty))
+		return srv.(TableSrvServer).NodeCloseSrv(ctx, req.(*emptypb.Empty))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Table_TableFindSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_TableFindSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).TableFindSrv(ctx, in)
+		return srv.(TableSrvServer).TableFindSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_TableFindSrv_FullMethodName,
+		FullMethod: TableSrv_TableFindSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).TableFindSrv(ctx, req.(*TableIdReq))
+		return srv.(TableSrvServer).TableFindSrv(ctx, req.(*TableIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Table_TableCountSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_TableCountSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableQueryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).TableCountSrv(ctx, in)
+		return srv.(TableSrvServer).TableCountSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_TableCountSrv_FullMethodName,
+		FullMethod: TableSrv_TableCountSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).TableCountSrv(ctx, req.(*TableQueryReq))
+		return srv.(TableSrvServer).TableCountSrv(ctx, req.(*TableQueryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Table_TableListSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_TableListSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableQueryReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).TableListSrv(ctx, in)
+		return srv.(TableSrvServer).TableListSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_TableListSrv_FullMethodName,
+		FullMethod: TableSrv_TableListSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).TableListSrv(ctx, req.(*TableQueryReq))
+		return srv.(TableSrvServer).TableListSrv(ctx, req.(*TableQueryReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Table_TableGetSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_TableGetSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).TableGetSrv(ctx, in)
+		return srv.(TableSrvServer).TableGetSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_TableGetSrv_FullMethodName,
+		FullMethod: TableSrv_TableGetSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).TableGetSrv(ctx, req.(*TableIdReq))
+		return srv.(TableSrvServer).TableGetSrv(ctx, req.(*TableIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-func _Table_TableCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _TableSrv_TableCloseSrv_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(TableIdReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(TableServer).TableCloseSrv(ctx, in)
+		return srv.(TableSrvServer).TableCloseSrv(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: Table_TableCloseSrv_FullMethodName,
+		FullMethod: TableSrv_TableCloseSrv_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(TableServer).TableCloseSrv(ctx, req.(*TableIdReq))
+		return srv.(TableSrvServer).TableCloseSrv(ctx, req.(*TableIdReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// Table_ServiceDesc is the grpc.ServiceDesc for Table service.
+// TableSrv_ServiceDesc is the grpc.ServiceDesc for TableSrv service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var Table_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "table_pb.Table",
-	HandlerType: (*TableServer)(nil),
+var TableSrv_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "table_pb.TableSrv",
+	HandlerType: (*TableSrvServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "NodeOpenSrv",
-			Handler:    _Table_NodeOpenSrv_Handler,
+			Handler:    _TableSrv_NodeOpenSrv_Handler,
 		},
 		{
 			MethodName: "NodeCloseSrv",
-			Handler:    _Table_NodeCloseSrv_Handler,
+			Handler:    _TableSrv_NodeCloseSrv_Handler,
 		},
 		{
 			MethodName: "TableFindSrv",
-			Handler:    _Table_TableFindSrv_Handler,
+			Handler:    _TableSrv_TableFindSrv_Handler,
 		},
 		{
 			MethodName: "TableCountSrv",
-			Handler:    _Table_TableCountSrv_Handler,
+			Handler:    _TableSrv_TableCountSrv_Handler,
 		},
 		{
 			MethodName: "TableListSrv",
-			Handler:    _Table_TableListSrv_Handler,
+			Handler:    _TableSrv_TableListSrv_Handler,
 		},
 		{
 			MethodName: "TableGetSrv",
-			Handler:    _Table_TableGetSrv_Handler,
+			Handler:    _TableSrv_TableGetSrv_Handler,
 		},
 		{
 			MethodName: "TableCloseSrv",
-			Handler:    _Table_TableCloseSrv_Handler,
+			Handler:    _TableSrv_TableCloseSrv_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

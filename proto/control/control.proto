@@ -102,7 +102,7 @@ message TimedStart {
   int64 StartTime = 2;
 }
 
-message GameDO {
+message Game {
   // @gotags: redis:"gameId"
   int64 GameId = 1;
   // @gotags: redis:"gameTypeId"
@@ -135,7 +135,7 @@ message GameDO {
 
 message GameSettle {
   int64 StartTime = 1;
-  GameDO Game = 2;
+  Game Game = 2;
   repeated UserRank RankList = 3;
 }
 
@@ -147,6 +147,6 @@ message UserRank {
 }
 
 message UserGameEnd {
-  GameDO Game = 1;
+  Game Game = 1;
   UserRank User = 2;
 }
