@@ -34,13 +34,13 @@ message TableQueryReq {
   int64 GameId = 2;
 }
 
-enum PhraseStatus {
-  PhraseStatusUnspecified = 0;
-  PhraseStatusStarted = 2; //已开局
-  PhraseStatusCallRate = 3; //叫分中
-  PhraseStatusCallDouble = 4; //叫加倍中
-  PhraseStatusPlaying = 5; //出牌中
-  PhraseStatusEnd = 6; //结束
+enum DeckStatus {
+  DeckStatusUnspecified = 0;
+  DeckStatusStarted = 2; //已开局
+  DeckStatusCallRate = 3; //叫分中
+  DeckStatusCallDouble = 4; //叫加倍中
+  DeckStatusPlaying = 5; //出牌中
+  DeckStatusEnd = 6; //结束
 }
 
 message GamePlay {
@@ -73,7 +73,7 @@ message UserVO {
   int32 Rank = 15;
   bool Entered = 16;
   bool Landlord = 17;
-  int32 PhraseScore = 18;
+  int32 DeckScore = 18;
   int32 TableScore = 20;
   uint32 BaseRate = 21;
   bool BaseRateCalled = 22;
@@ -90,23 +90,24 @@ message UserVO {
   uint32 VoteState = 33;
 }
 
-message PhraseRecord {
+message DeckRecord {
   int64 id = 1;
   int64 User = 2;
   string Cards = 3;
   bool Landlord = 4;
-  int32 Score = 5;
-  int32 StartScore = 6;
-  int32 EndScore = 7;
+  bool win = 5;
+  int32 Score = 6;
+  int32 StartScore = 7;
+  int32 EndScore = 8;
 }
 
-message Phrase {
-  int64 PhraseId = 3;
-  uint32 PhraseNo = 4;
+message DeckVO {
+  int64 DeckId = 3;
+  uint32 DeckNo = 4;
   string StartAt = 5;
   string EndAt = 6;
-  repeated PhraseRecord PhraseRecords = 7;
-  PhraseStatus PhraseStatus = 8;
+  repeated DeckRecord DeckRecords = 7;
+  DeckStatus DeckStatus = 8;
   uint32 RateCalledTimes = 9;
   int64 CurrentUser = 10;
   int64 NextUser = 11;
@@ -130,9 +131,9 @@ message TableVO {
   uint64 Lifetime = 4; //存在时间
   TableStatus TableStatus = 5;
   string StartAt = 6;
-  uint32 PhraseNo = 7;
+  uint32 DeckNo = 7;
   repeated UserVO Users = 8;
-  repeated Phrase Phrases = 9;
+  repeated DeckVO Decks = 9;
 }
 
 message TableListVO {
@@ -147,6 +148,6 @@ message TableListVO {
   uint64 Lifetime = 9; //存在时间
   TableStatus TableStatus = 10;
   string StartAt = 11;
-  uint32 PhraseNo = 12;
+  uint32 DeckNo = 12;
   repeated int64 Users = 13;
 }
