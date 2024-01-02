@@ -7,13 +7,13 @@ import "google/protobuf/empty.proto";
 
 option go_package = "server-proto/pb/table;table_pb";
 
-service TableSrv {
+service Table {
   rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc TableFindSrv (TableIdReq) returns (TableCount) {}
   rpc TableCountSrv (TableQueryReq) returns (TableCount) {}
   rpc TableListSrv (TableQueryReq) returns (TableList) {}
-  rpc TableGetSrv (TableIdReq) returns (Table) {}
+  rpc TableGetSrv (TableIdReq) returns (TableGetVO) {}
   rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
 
@@ -22,7 +22,7 @@ message TableCount {
 }
 
 message TableList {
-  repeated TableVO Tables = 1;
+  repeated TableListVO Tables = 1;
 }
 
 message TableIdReq {
@@ -124,7 +124,7 @@ message Deck {
   repeated Sequence SequenceList = 20;
 }
 
-message Table {
+message TableGetVO {
   string NodeName = 1;
   control_pb.TableConfig Config = 2;
   string CreatedAt = 3;
@@ -136,7 +136,7 @@ message Table {
   repeated Deck Decks = 9;
 }
 
-message TableVO {
+message TableListVO {
   string NodeName = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID

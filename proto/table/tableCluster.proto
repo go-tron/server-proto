@@ -6,13 +6,13 @@ import "table.proto";
 
 option go_package = "server-proto/pb/table;table_pb";
 
-service TableClusterSrv {
+service TableCluster {
   rpc NodeListSrv (google.protobuf.Empty) returns (NodeList) {}
   rpc NodeOpenSrv (NodeNameReq) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (NodeNameReq) returns (google.protobuf.Empty) {}
   rpc TableCountSrv (TableQueryReq) returns (TableCount) {}
   rpc TableListSrv (TableQueryReq) returns (TableList) {}
-  rpc TableGetSrv (TableIdReq) returns (Table) {}
+  rpc TableGetSrv (TableIdReq) returns (TableGetVO) {}
   rpc TableCloseSrv (TableIdReq) returns (google.protobuf.Empty) {}
 }
 
