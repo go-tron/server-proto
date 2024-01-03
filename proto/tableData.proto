@@ -1,14 +1,15 @@
 syntax = "proto3";
 
 package tableData_pb;
+import "base.proto";
 import "table.proto";
 import "control.proto";
 
 option go_package = "server-proto/pb/tableData;tableData_pb";
 
-enum Topic {
-  TopicUnspecified = 0;
-  TopicTableEnd = 1;
+enum TableDataTopic {
+  TableDataTopicUnspecified = 0;
+  TableDataTopicTableEnd = 1;
 }
 
 message TableEnd {
@@ -26,8 +27,7 @@ message User {
   string UserNo = 3;
   string Nickname = 4;
   string Avatar = 5;
-  uint32 Gender = 6;
-  uint32 Seat = 7;
+  uint32 Seat = 6;
 }
 
 message Deck {
@@ -35,5 +35,6 @@ message Deck {
   uint32 DeckNo = 2;
   int64 StartAt = 3;
   int64 EndAt = 4;
-  repeated table_pb.DeckRecord Records = 5;
+  RateDetails RateDetails = 5;
+  repeated table_pb.DeckRecord Records = 6;
 }
