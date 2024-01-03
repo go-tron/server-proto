@@ -8,7 +8,7 @@ option go_package = "server-proto/pb/tableData;tableData_pb";
 
 enum Topic {
   TopicUnspecified = 0;
-  TopicTableTableEnd = 1;
+  TopicTableEnd = 1;
 }
 
 message TableEnd {
