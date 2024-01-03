@@ -13,9 +13,9 @@ enum Topic {
 
 message TableEnd {
   control_pb.TableConfig Config = 1;
-  string CreatedAt = 2;
-  string StartAt = 3;
-  string EndAt = 4;
+  int64 CreatedAt = 2;
+  int64 StartAt = 3;
+  int64 EndAt = 4;
   repeated User Users = 5;
   repeated Deck Decks = 6;
 }
@@ -33,7 +33,7 @@ message User {
 message Deck {
   int64 DeckId = 1;
   uint32 DeckNo = 2;
-  string StartAt = 3;
-  string EndAt = 4;
+  int64 StartAt = 3;
+  int64 EndAt = 4;
   repeated table_pb.DeckRecord Records = 5;
 }
