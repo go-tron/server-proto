@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-package game_pb;
 option go_package = "server-proto/pb/game;game_pb";
 
 //游戏类型
@@ -29,6 +28,15 @@ enum TableStatus {
   TableStatusPlaying = 5; //出牌中
   TableStatusDeckEnd = 6; //本副牌结算中
   TableStatusEnd = 7; //已结束
+}
+
+enum DeckStatus {
+  DeckStatusUnspecified = 0;
+  DeckStatusStarted = 2; //已开局
+  DeckStatusCallRate = 3; //叫分中
+  DeckStatusCallDouble = 4; //叫加倍中
+  DeckStatusPlaying = 5; //出牌中
+  DeckStatusEnd = 6; //结束
 }
 
 enum Action {

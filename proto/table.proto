@@ -1,8 +1,8 @@
 syntax = "proto3";
 
 package table_pb;
-import "game/base.proto";
-import "control/control.proto";
+import "base.proto";
+import "control.proto";
 import "google/protobuf/empty.proto";
 
 option go_package = "server-proto/pb/table;table_pb";
@@ -34,15 +34,6 @@ message TableQueryReq {
   int64 GameId = 2;
 }
 
-enum DeckStatus {
-  DeckStatusUnspecified = 0;
-  DeckStatusStarted = 2; //已开局
-  DeckStatusCallRate = 3; //叫分中
-  DeckStatusCallDouble = 4; //叫加倍中
-  DeckStatusPlaying = 5; //出牌中
-  DeckStatusEnd = 6; //结束
-}
-
 message GamePlay {
   int64 User = 1;
   string Cards = 2;
@@ -51,7 +42,7 @@ message GamePlay {
 message Sequence {
   string Time = 1;
   int64 User = 2;
-  game_pb.Action Action = 3;
+  Action Action = 3;
   int64 Timeout = 4;
   bool Reacted = 5;
 }
@@ -63,31 +54,31 @@ message User {
   string Nickname = 4;
   string Avatar = 5;
   uint32 Gender = 6;
-  uint32 Seat = 8;
-  bool Joined = 9;
-  bool Ready = 10;
-  bool Online = 11;
-  bool Leaved = 12;
-  bool Hosted = 13;
-  int32 Score = 14;
-  int32 Rank = 15;
-  bool Entered = 16;
-  bool Landlord = 17;
-  int32 DeckScore = 18;
-  int32 TableScore = 20;
-  uint32 BaseRate = 21;
-  bool BaseRateCalled = 22;
-  uint32 Double = 23;
-  uint32 DoubleRate = 24;
-  bool DoubleCalled = 25;
-  uint32 Rate = 26;
-  bool Winner = 27;
-  string Cards = 28;
-  string CardSetList = 29;
-  string HoldingCards = 30;
-  uint32 PlayedHands = 31;
-  string LastCards = 32;
-  uint32 VoteState = 33;
+  uint32 Seat = 7;
+  bool Joined = 8;
+  bool Ready = 9;
+  bool Online = 10;
+  bool Leaved = 11;
+  bool Hosted = 12;
+  int32 Score = 13;
+  int32 Rank = 14;
+  bool Entered = 15;
+  bool Landlord = 16;
+  int32 DeckScore = 17;
+  int32 TableScore = 18;
+  uint32 BaseRate = 19;
+  bool BaseRateCalled = 20;
+  uint32 Double = 21;
+  uint32 DoubleRate = 22;
+  bool DoubleCalled = 23;
+  uint32 Rate = 24;
+  bool Winner = 25;
+  string Cards = 26;
+  string CardSetList = 27;
+  string HoldingCards = 28;
+  uint32 PlayedHands = 29;
+  string LastCards = 30;
+  uint32 VoteState = 31;
 }
 
 message DeckRecord {
@@ -106,7 +97,7 @@ message Deck {
   uint32 DeckNo = 2;
   string StartAt = 3;
   string EndAt = 4;
-  repeated DeckRecord DeckRecords = 5;
+  repeated DeckRecord Records = 5;
   DeckStatus DeckStatus = 6;
   uint32 RateCalledTimes = 7;
   int64 CurrentUser = 8;
@@ -120,7 +111,7 @@ message Deck {
   int64 Landlord = 16;
   uint32 BombCount = 17;
   uint32 Spring = 18;
-  game_pb.RateDetails RateDetails = 19;
+  RateDetails RateDetails = 19;
   repeated Sequence SequenceList = 20;
 }
 
@@ -129,7 +120,7 @@ message TableGetVO {
   control_pb.TableConfig Config = 2;
   string CreatedAt = 3;
   uint64 Lifetime = 4; //存在时间
-  game_pb.TableStatus TableStatus = 5;
+  TableStatus TableStatus = 5;
   string StartAt = 6;
   uint32 DeckNo = 7;
   repeated User Users = 8;
@@ -141,22 +132,13 @@ message TableListVO {
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
   int64 RoundId = 4; //轮次ID
-  game_pb.GameType GameType = 5; //游戏类型
-  game_pb.GameCategory GameCategory = 6; //游戏类别
+  GameType GameType = 5; //游戏类型
+  GameCategory GameCategory = 6; //游戏类别
   string Title = 7; //游戏标题
   string CreatedAt = 8;
   uint64 Lifetime = 9; //存在时间
-  game_pb.TableStatus TableStatus = 10;
+  TableStatus TableStatus = 10;
   string StartAt = 11;
   uint32 DeckNo = 12;
   repeated int64 Users = 13;
-}
-
-message TableEnd {
-  control_pb.TableConfig Config = 1;
-  string CreatedAt = 2;
-  string StartAt = 3;
-  string EndAt = 4;
-  repeated User Users = 8;
-  repeated Deck Decks = 9;
 }

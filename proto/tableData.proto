@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package table_pb;
+import "table.proto";
+import "control.proto";
+
+option go_package = "server-proto/pb/table;table_pb";
+
+enum DataTopic {
+  DataTopicUnspecified = 0;
+  DataTopicTableEnd = 1;
+}
+
+message TableEndData {
+  control_pb.TableConfig Config = 1;
+  string CreatedAt = 2;
+  string StartAt = 3;
+  string EndAt = 4;
+  repeated UserData Users = 5;
+  repeated DeckData Decks = 6;
+}
+
+message UserData {
+  bool Robot = 1;
+  int64 UserId = 2;
+  string UserNo = 3;
+  string Nickname = 4;
+  string Avatar = 5;
+  uint32 Gender = 6;
+  uint32 Seat = 7;
+}
+
+message DeckData {
+  int64 DeckId = 1;
+  uint32 DeckNo = 2;
+  string StartAt = 3;
+  string EndAt = 4;
+  repeated DeckRecord Records = 5;
+}

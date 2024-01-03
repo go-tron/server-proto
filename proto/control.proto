@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package control_pb;
 import "google/protobuf/any.proto";
-import "game/base.proto";
+import "base.proto";
 
 option go_package = "server-proto/pb/control;control_pb";
 
@@ -32,8 +32,8 @@ message TableConfig {
   uint32 ForceJoinTimeout = 4; //强制加入时间
   int64 RoundId = 5; //轮次ID
   string TableNo = 6; //牌桌编号
-  game_pb.GameType GameType = 7; //游戏类型
-  game_pb.GameCategory GameCategory = 8; //游戏类别
+  GameType GameType = 7; //游戏类型
+  GameCategory GameCategory = 8; //游戏类别
   uint32 GameRuleId = 9; //游戏规则ID
   uint32 GameConfigId = 10; //游戏配置ID
   string Title = 11; //游戏标题
@@ -59,8 +59,8 @@ message TableConfig {
 message CreateTableResult {
   int64 GameId = 1;
   int64 TableId = 2;
-  game_pb.GameType GameType = 3; //游戏类型
-  game_pb.GameCategory GameCategory = 4; //游戏类别
+  GameType GameType = 3; //游戏类型
+  GameCategory GameCategory = 4; //游戏类别
   bool Succeed = 5;
 }
 
@@ -84,8 +84,8 @@ message ForceJoinTable {
 message TableEnd {
   int64 GameId = 1;
   int64 TableId = 2;
-  game_pb.GameType GameType = 3; //游戏类型
-  game_pb.GameCategory GameCategory = 4; //游戏类别
+  GameType GameType = 3; //游戏类型
+  GameCategory GameCategory = 4; //游戏类别
 }
 
 message QuitTable {
@@ -93,8 +93,8 @@ message QuitTable {
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
   uint32 GameConfigId = 4;
-  game_pb.GameType GameType = 5; //游戏类型
-  game_pb.GameCategory GameCategory = 6; //游戏类别
+  GameType GameType = 5; //游戏类型
+  GameCategory GameCategory = 6; //游戏类别
 }
 
 message TimedStart {

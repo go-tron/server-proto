@@ -1,6 +1,5 @@
 syntax = "proto3";
 
-package game_pb;
 import "base.proto";
 option go_package = "server-proto/pb/game;game_pb";
 
