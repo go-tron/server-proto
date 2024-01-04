@@ -28,6 +28,8 @@ message User {
   string Nickname = 4;
   string Avatar = 5;
   uint32 Seat = 6;
+  int32 Score = 7;
+  int32 TableScore = 8;
 }
 
 message Deck {
@@ -35,6 +37,8 @@ message Deck {
   uint32 DeckNo = 2;
   int64 StartAt = 3;
   int64 EndAt = 4;
-  RateDetails RateDetails = 5;
-  repeated table_pb.DeckRecord Records = 6;
+  string Cards = 5;
+  string HoleCards = 6;
+  RateDetails RateDetails = 7;
+  repeated table_pb.DeckRecord Records = 8;
 }

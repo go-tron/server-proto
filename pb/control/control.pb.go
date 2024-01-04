@@ -11,7 +11,7 @@ import (
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	anypb "google.golang.org/protobuf/types/known/anypb"
 	reflect "reflect"
-	game "github.com/go-tron/server-proto/pb/game"
+	game "server-proto/pb/game"
 	sync "sync"
 )
 
