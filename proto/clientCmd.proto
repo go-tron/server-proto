@@ -11,7 +11,7 @@ enum ClientCmd {
 
   ClientCmdCurrentAppPage = 201; //用户当前页面 ClientCurrentAppPage
   ClientCmdFindMatchingGame = 202; //查询是否有匹配中的人满赛 消息体 无
-  ClientCmdQuitMatch = 203; //退出当前比赛 消息体 ClientQuitMatch
+  ClientCmdQuitGame = 203; //退出当前比赛 消息体 ClientQuitGame
 
   //牌桌
   ClientCmdJoin = 2001; //加入 消息体 ClientJoin
@@ -39,7 +39,7 @@ message ClientLogin {
   string DeviceNo = 2; //设备唯一码
 }
 
-message ClientQuitMatch {
+message ClientQuitGame {
   string GameId = 1;
 }
 
