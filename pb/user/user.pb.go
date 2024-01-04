@@ -10,7 +10,7 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	game "server-proto/pb/game"
+	game "github.com/go-tron/server-proto/pb/game"
 	sync "sync"
 )
 

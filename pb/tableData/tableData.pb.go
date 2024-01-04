@@ -10,9 +10,9 @@ import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
-	control "server-proto/pb/control"
-	game "server-proto/pb/game"
-	table "server-proto/pb/table"
+	control "github.com/go-tron/server-proto/pb/control"
+	game "github.com/go-tron/server-proto/pb/game"
+	table "github.com/go-tron/server-proto/pb/table"
 	sync "sync"
 )
 
