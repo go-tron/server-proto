@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option go_package = "server-proto/pb/socketMsg;socketMsg_pb";
+
+message BroadcastToMany{
+  repeated string Users = 1;
+  bytes Message = 2;
+}
