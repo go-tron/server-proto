@@ -95,6 +95,7 @@ message QuitTable {
   uint32 GameConfigId = 4;
   GameType GameType = 5; //游戏类型
   GameCategory GameCategory = 6; //游戏类别
+  uint32 Seat = 7; //座位
 }
 
 message TimedStart {
