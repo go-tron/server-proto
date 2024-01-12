@@ -103,6 +103,10 @@ message TimedStart {
   int64 StartTime = 2;
 }
 
+message FullStart {
+  uint32 GameConfigId = 1;
+}
+
 message Game {
   // @gotags: redis:"gameId"
   int64 GameId = 1;
