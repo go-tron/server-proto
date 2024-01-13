@@ -84,8 +84,9 @@ message ForceJoinTable {
 message TableEnd {
   int64 GameId = 1;
   int64 TableId = 2;
-  GameType GameType = 3; //游戏类型
-  GameCategory GameCategory = 4; //游戏类别
+  uint32 GameConfigId = 3;
+  GameType GameType = 4; //游戏类型
+  GameCategory GameCategory = 5; //游戏类别
 }
 
 message QuitTable {
@@ -136,6 +137,8 @@ message Game {
   int64 StartAt = 13;
   // @gotags: redis:"endAt"
   int64 EndAt = 14;
+  // @gotags: redis:"config"
+  string Config = 15;
 }
 
 message GameSettle {
