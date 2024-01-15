@@ -83,10 +83,11 @@ message ForceJoinTable {
 
 message TableEnd {
   int64 GameId = 1;
-  int64 TableId = 2;
-  uint32 GameConfigId = 3;
-  GameType GameType = 4; //游戏类型
-  GameCategory GameCategory = 5; //游戏类别
+  int64 RoundId = 2;
+  int64 TableId = 3;
+  uint32 GameConfigId = 4;
+  GameType GameType = 5; //游戏类型
+  GameCategory GameCategory = 6; //游戏类别
 }
 
 message QuitTable {
