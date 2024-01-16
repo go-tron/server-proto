@@ -2,15 +2,21 @@ syntax = "proto3";
 
 package control_pb;
 import "google/protobuf/any.proto";
+import "google/protobuf/empty.proto";
 import "base.proto";
 
 option go_package = "server-proto/pb/control;control_pb";
 
-message TableMessage {
+service Control {
+  rpc ClientCmdSrv (ControlMessage) returns (google.protobuf.Empty) {}
+  rpc QuitTableSrv (QuitTable) returns (google.protobuf.Empty) {}
+  rpc TableEndSrv (TableEnd) returns (google.protobuf.Empty) {}
+}
+
+message ControlMessage {
   uint32 Cmd = 1;
   google.protobuf.Any Content = 2;
   string UserId = 3;
-  string TableId = 4;
 }
 
 message AssignUser {

@@ -1,9 +1,9 @@
 syntax = "proto3";
 
 package tableMonitor_pb;
+import "google/protobuf/empty.proto";
 import "base.proto";
 import "control.proto";
-import "google/protobuf/empty.proto";
 
 option go_package = "server-proto/pb/tableMonitor;tableMonitor_pb";
 
