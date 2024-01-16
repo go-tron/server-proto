@@ -1,12 +1,12 @@
 syntax = "proto3";
 
-package table_pb;
+package tableMonitor_pb;
 import "google/protobuf/empty.proto";
-import "table.proto";
+import "tableMonitor.proto";
 
-option go_package = "server-proto/pb/table;table_pb";
+option go_package = "server-proto/pb/tableMonitor;tableMonitor_pb";
 
-service TableCluster {
+service TableClusterMonitor {
   rpc NodeListSrv (google.protobuf.Empty) returns (NodeList) {}
   rpc NodeOpenSrv (NodeNameReq) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (NodeNameReq) returns (google.protobuf.Empty) {}

@@ -1,13 +1,13 @@
 syntax = "proto3";
 
-package table_pb;
+package tableMonitor_pb;
 import "base.proto";
 import "control.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "server-proto/pb/table;table_pb";
+option go_package = "server-proto/pb/tableMonitor;tableMonitor_pb";
 
-service Table {
+service TableMonitor {
   rpc NodeOpenSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc NodeCloseSrv (google.protobuf.Empty) returns (google.protobuf.Empty) {}
   rpc TableFindSrv (TableIdReq) returns (TableCount) {}

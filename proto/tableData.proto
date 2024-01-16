@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package tableData_pb;
 import "base.proto";
-import "table.proto";
+import "tableMonitor.proto";
 import "control.proto";
 
 option go_package = "server-proto/pb/tableData;tableData_pb";
@@ -40,5 +40,5 @@ message Deck {
   string Cards = 5;
   string HoleCards = 6;
   RateDetails RateDetails = 7;
-  repeated table_pb.DeckRecord Records = 8;
+  repeated tableMonitor_pb.DeckRecord Records = 8;
 }
