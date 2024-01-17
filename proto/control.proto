@@ -36,7 +36,7 @@ message TableConfig {
   repeated AssignUser AssignUsers = 1;
   int64 GameId = 2; //游戏ID
   int64 TableId = 3; //牌桌ID
-  uint32 ForceJoinTimeout = 4; //强制加入时间
+  int64 ForceJoinTime = 4; //强制加入时间
   int64 RoundId = 5; //轮次ID
   string TableNo = 6; //牌桌编号
   GameType GameType = 7; //游戏类型
