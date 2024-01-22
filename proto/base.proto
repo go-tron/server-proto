@@ -208,6 +208,7 @@ message Table {
   uint32 CurrentTimeout = 14; //当前到谁 超时秒数
   optional uint32 VoteTimeout = 15; //当前投票超时秒数，存在时表示正在进行解散投票中
   RateDetails RateDetails = 16; //倍率详情
+  uint32 RateCalled = 17; //叫了几次地主 0无 123
 }
 
 message Round {
