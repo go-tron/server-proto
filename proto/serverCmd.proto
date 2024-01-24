@@ -143,6 +143,7 @@ message ServerTakeLandlord {
   uint32 Seat = 1; //地主
   bytes Cards = 2; //翻开4张底牌
   uint32 HoleRate = 3; //底牌倍率
+  uint32 HandCardNumber = 4; //当前手牌数量
 }
 
 message ServerToCallRate {
@@ -185,15 +186,18 @@ message ServerCallDouble {
 message ServerPlay {
   uint32 Seat = 1;
   bytes Cards = 2;
+  uint32 HandCardNumber = 3; //当前手牌数量
 }
 
 message ServerPass {
   uint32 Seat = 1;
+  uint32 HandCardNumber = 2; //当前手牌数量
 }
 
 message ServerFollow {
   uint32 Seat = 1;
   bytes Cards = 2;
+  uint32 HandCardNumber = 3; //当前手牌数量
 }
 
 message ServerRateChange{
