@@ -48,6 +48,13 @@ enum Action {
   ActionCantFollow = 5; //要不起
 }
 
+enum CallRateType {
+  CallRateTypeUnspecified = 0;
+  CallRateTypeThreePoint = 1; //叫三分
+  CallRateTypeLandlord = 2; //抢地主
+}
+
+
 enum EndTag {
   EndTagUnspecified = 0;
   EndTagReachMax = 1; //封顶
@@ -189,6 +196,7 @@ message Game {
   bool WithDouble = 14; //是否带加倍
   uint32 PromotePeople = 15; //晋级人数
   uint32 InitialScore = 16; //初始积分
+  CallRateType CallRateType = 17; //叫分方式
 }
 
 message Table {
