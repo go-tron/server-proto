@@ -61,6 +61,7 @@ message TableConfig {
   bool WithBomb = 26; //是否带炸弹
   bool WithDouble = 27; //是否带加倍
   uint32 MaxRate = 28; //最大倍率
+  CallRateType CallRateType = 29; //叫分方式
 }
 
 message CreateTableResult {
