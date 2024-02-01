@@ -62,6 +62,7 @@ message TableConfig {
   bool WithDouble = 27; //是否带加倍
   uint32 MaxRate = 28; //最大倍率
   CallRateType CallRateType = 29; //叫分方式
+  bool WithHoleRate = 30; //是否计算底牌倍率
 }
 
 message CreateTableResult {
