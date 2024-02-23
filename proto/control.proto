@@ -7,6 +7,13 @@ import "base.proto";
 
 option go_package = "server-proto/pb/control;control_pb";
 
+enum RobotLevel {
+  RobotLevelUnspecified = 0;
+  RobotLevelBeginner = 1; //初级
+  RobotLevelIntermediate = 2; //中级
+  RobotLevelAdvanced = 3; //高级
+}
+
 service Control {
   rpc ClientCmdSrv (ControlMessage) returns (google.protobuf.Empty) {}
   rpc QuitTableSrv (QuitTable) returns (google.protobuf.Empty) {}
@@ -63,6 +70,7 @@ message TableConfig {
   uint32 MaxRate = 28; //最大倍率
   CallRateType CallRateType = 29; //叫分方式
   bool WithHoleRate = 30; //是否计算底牌倍率
+  RobotLevel RobotLevel = 31; //机器人等级
 }
 
 message CreateTableResult {

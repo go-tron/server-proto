@@ -90,6 +90,9 @@ message DeckRecord {
   int32 Score = 6;
   int32 StartScore = 7;
   int32 EndScore = 8;
+  uint32 Rate = 9;
+  uint32 BombCount = 10;
+  uint32 Spring = 11; //1:春天 2:反春天
 }
 
 message Deck {
